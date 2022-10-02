@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Home</title>
+<link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -25,8 +26,38 @@
 		ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
 		dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
 		aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
-		qui ratione voluptatem sequi nesciunt. </main>
-		<footer> &copy; Webontwikkeling 3, UC Leuven-Limburg </footer>
+		qui ratione voluptatem sequi nesciunt. Sed ut perspiciatis unde omnis iste natus error sit
+			voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+			ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+			dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+			aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+			qui ratione voluptatem sequi nesciunt.Sed ut perspiciatis unde omnis iste natus error sit
+			voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+			ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+			dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+			aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+			qui ratione voluptatem sequi nesciunt.Sed ut perspiciatis unde omnis iste natus error sit
+			voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+			ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+			dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+			aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+			qui ratione voluptatem sequi nesciunt.Sed ut perspiciatis unde omnis iste natus error sit
+			voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+			ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+			dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+			aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+			qui ratione voluptatem sequi nesciunt.Sed ut perspiciatis unde omnis iste natus error sit
+			voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+			ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+			dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+			aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+			qui ratione voluptatem sequi nesciunt.Sed ut perspiciatis unde omnis iste natus error sit
+			voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+			ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+			dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+			aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+			qui ratione voluptatem sequi nesciunt.</main>
+		<footer><p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p></footer>
 	</div>
 </body>
 </html>
