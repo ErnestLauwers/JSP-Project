@@ -11,32 +11,41 @@
 <div id="container">
 <header>
     <h1>
-        <span>XXX</span>
+        <a href="">Register</a>
     </h1>
     <jsp:include page="header.jsp">
-        <jsp:param name="hier" value="Home"/>
+        <jsp:param name="hier" value="Overview"/>
     </jsp:include>
     <h2>
-User Overview
+        User Overview
     </h2>
-
-</header><main>
-<table>
-<tr>
-<th>E-mail</th>
-<th>First Name</th>
-<th>Last Name</th>
-</tr>
-<tr>
-<td>jan.janssens@hotmail.com</td><td>Jan</td><td>Janssens</td>
-</tr>
-
-<caption>Users Overview</caption>
+    <hr class="solid">
+</header>
+    <main>
+        <table>
+            <tr>
+                <th>UserId</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>E-mail</th>
+                <th>Team</th>
+                <th>Role</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Jan</td>
+                <td>Janssens</td>
+                <td>jan.janssens@hotmail.com</td>
+                <td>Alpha</td>
+                <td>Employee</td>
+                <td class="wijzig"><div class="knopWijzig"><a href=""><img src="images/wijzig.png" alt="wijzig"></a></div></td>
+                <td class="verwijder"><div class="knopVerwijder"><a href=""><img src="images/verwijder.png" alt="verwijder"></a></div></td>
+            </tr>
 </table>
 </main>
-<footer>
-&copy; Webontwikkeling 3, UC Leuven-Limburg
-</footer>
+    <footer>
+        <p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p>
+    </footer>
 </div>
 </body>
 </html>

@@ -13,13 +13,13 @@
 	<div id="container">
 		<header>
 			<h1>
-				<span>XXX</span>
+				<a href="">Register</a>
 			</h1>
 			<jsp:include page="header.jsp">
 				<jsp:param name="hier" value="Home"/>
 			</jsp:include>
 			<h2>Home</h2>
-
+			<hr class="solid">
 		</header>
 		<main> Sed ut perspiciatis unde omnis iste natus error sit
 		voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
@@ -57,7 +57,9 @@
 			dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
 			aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
 			qui ratione voluptatem sequi nesciunt.</main>
-		<footer><p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p></footer>
+		<footer>
+			<p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p>
+		</footer>
 	</div>
 </body>
 </html>

@@ -22,7 +22,7 @@ public class UserView {
 
         try {
             Class.forName("ui.view.Secret");
-            Secret.setPass(properties);
+            //Secret.setPass(properties);
         } catch (ClassNotFoundException e) {
             System.out.println("Class ui.view.Secret with credentials not found");
         }
@@ -51,8 +51,8 @@ public class UserView {
                 String name = resultSet.getString("name");
                 String type = resultSet.getString("type");
                 int food = resultSet.getInt("food");
-                User user = new User(usd, name, type, food);
-                System.out.println(user.toString());
+                //User user = new User(name, type, food);
+                //System.out.println(user.toString());
             }
 
 
