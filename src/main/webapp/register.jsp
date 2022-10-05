@@ -1,34 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta charset="UTF-8">
-<title>Sign Up</title>
-<link rel="stylesheet" href="css/normalize.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-    <div id="container">
-        <header>
-            <h1>
-                <a href="">Register</a>
-            </h1>
-    <jsp:include page="header.jsp">
-        <jsp:param name="hier" value="Home"/>
-    </jsp:include>
+<div id="container">
+    <header>
+        <h1>
+            <a href="">Register</a>
+        </h1>
+        <jsp:include page="header.jsp">
+            <jsp:param name="hier" value="Home"/>
+        </jsp:include>
         <h2>
             Register
         </h2>
         <hr class="solid">
-        </header>
-<main>
-	<div class="alert-danger">
-		<ul>
-			<li>Some error</li>
-		</ul>
-	</div>
+    </header>
+    <main>
+        <div class="alert-danger">
+            <ul>
+                <li>Some error</li>
+            </ul>
+        </div>
         <section class="invulFormulier">
             <p class="please">Please fill in all input fields.</p>
             <form novalidate="novalidate">
@@ -45,10 +45,10 @@
 
             </form>
         </section>
-</main>
-<footer>
-    <p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p>
-</footer>
+    </main>
+    <footer>
+        <p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p>
+    </footer>
 </div>
 </body>
 </html>

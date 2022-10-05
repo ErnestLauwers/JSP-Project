@@ -1,85 +1,83 @@
 @CHARSET "UTF-8";
 * {
-	margin:0;
-	padding: 0;
-	font-family: "Yu Gothic", sans-serif;
+    margin:0;
+    padding: 0;
+    font-family: "Yu Gothic", sans-serif;
 }
 
 body {
-	font-family: arial,sans-serif;
-	font-size: 90%;
-	color: #eceeef;
-	background-color: #232020;
+    font-family: arial,sans-serif;
+    font-size: 90%;
+    color: #eceeef;
+    background-color: #232020;
 }
 
 div#container {
-	background-color: #484747;
-	margin: auto;
-	height: 98vh;
+    background-color: #484747;
+    margin: auto;
+    height: 98vh;
 }
 
 footer {
-	background-color: #414040;
-	border: solid 1px #232020;
-	bottom: 0;
-	position: fixed;
-	width: 95%;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 15px 0;
+    background-color: #414040;
+    border: solid 1px #232020;
+    bottom: 0;
+    position: fixed;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px 0;
 }
 
 footer p {
-	text-align: center;
+    text-align: center;
 }
 
 nav {
-	display: flex;
-	align-items: center;
-	background-color: #414040;
-	justify-content: space-between;
-	margin: auto;
-	border: solid #232020;
+    display: flex;
+    align-items: center;
+    background-color: #414040;
+    justify-content: space-between;
+    margin: auto;
+    border: solid #232020;
 }
 
 nav li.hier a{
-	color: #eceeef;
-	text-decoration-line: underline;
+    color: #eceeef;
+    text-decoration-line: underline;
 }
 
 .logo {
-	width: 120px;
-	cursor: pointer;
-	font-size: 3.5rem;
-	padding-left: 1rem;
+    width: 120px;
+    cursor: pointer;
+    font-size: 3.5rem;
+    padding-left: 1rem;
 }
 
 .logo a {
-	text-decoration: none;
-	color: #eceeef;
+    text-decoration: none;
+    color: #eceeef;
 }
 
 nav ul li {
-	display: inline-block;
-	padding: 2rem 1.5rem;
+    display: inline-block;
+    padding: 2rem 1.5rem;
 }
 
 nav ul li a{
-	text-decoration: none;
-	color: #eceeef;
-	text-transform: uppercase;
+    text-decoration: none;
+    color: #eceeef;
+    text-transform: uppercase;
 }
 
 .solid {
-	border: 0;
-	height: 2px;
-	background-image: linear-gradient(to right, transparent, #eceeef, transparent);
-	margin-bottom: 2rem;
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, transparent, #eceeef, transparent);
+    margin-bottom: 2rem;
 }
 
 /*
-
-
 nav ul {
 	list-style: none;
 	background-color: #484747;
@@ -87,7 +85,6 @@ nav ul {
 	margin-bottom: 1em;
 	border: solid 1px #232020;
 }
-
 nav ul li {
 	height: 2em;
 	font-size: 150%;
@@ -96,87 +93,84 @@ nav ul li {
 	width: 100%;
 	box-sizing: border-box;
 }
-
 nav ul li a{
 	color:  #eceeef;
 	text-decoration: none;
 	display: block;
 }
-
 nav ul li#actual {
 	background-color: #5CDB95;
 	border: solid 1px #379683
 }
-
 nav li.hier a{
 	color: #f4fdfd;
 	text-decoration-line: underline;
 }
 */
 h2, main {
-	padding: 15px 10px;
+    padding: 15px 10px;
 }
 
 h1 {
-	height: 5px;
-	background-repeat: no-repeat;
-	background-size: cover;
-	position: relative;
+    height: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
 }
 
 h1 a {
-	text-decoration: none;
-	position: absolute;
-	top: 5px;
-	right: 15px;
-	font-size: 0.7rem;
-	color: #ECECEC;
+    text-decoration: none;
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-size: 0.7rem;
+    color: #ECECEC;
 }
 
 h2 {
-	text-align: center;
-	font-size: 20px;
+    text-align: center;
+    font-size: 20px;
 }
 
 .wijzig img, .verwijder img {
-	width: 1.5rem;
-	height: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 .wijzig {
-	padding-left: 0.5rem;
-	padding-right: 0.1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.1rem;
 }
 
 .knopWijzig, .knopVerwijder {
-	background-color: #484747;
-	padding-right: 0.5rem;
-	padding-left: 0.5rem;
-	border: none;
+    background-color: #484747;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    border: none;
 }
 
 .knopWijzig:hover, .knopVerwijder:hover {
-	background-color: #414040;
-	border-radius: 50px;
+    background-color: #414040;
+    border-radius: 50px;
 }
 
 .verwijder {
-	padding-left: 0.4rem;
-	padding-right: 0.5rem;
+    padding-left: 0.4rem;
+    padding-right: 0.5rem;
 }
 
 table {
-	margin-right: auto;
-	margin-left: auto;
-	border: double #232020;
+    margin-right: auto;
+    margin-left: auto;
+    border: double #232020;
 }
 
 th, td {
-	padding-left: 1.5rem;
-	padding-right: 1.5rem;
-	text-decoration: none;
-	font-size: 0.9rem;
-	color: #ECECEC;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: #ECECEC;
 }
 
 .alert-danger {
@@ -188,8 +182,8 @@ th, td {
     width: 100%;
     margin-bottom: 1em;
     box-sizing: border-box;
-	margin-left: auto;
-	margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .alert-danger ul {
@@ -197,19 +191,19 @@ th, td {
 }
 
 .invulFormulier {
-	width: 55%;
-	border: dotted #232020;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 1rem 2rem;
-	background-color: #414040;
+    width: 55%;
+    border: dotted #232020;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem 2rem;
+    background-color: #414040;
 }
 
 .invulFormulier .please {
-	text-align: center;
-	text-decoration: underline;
-	margin-bottom: 1rem;
-	font-size: 1.2rem;
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
 }
 
 label,input,textarea {
@@ -228,7 +222,7 @@ input,textarea {
 }
 
 input[type="submit"] {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .has-error {
@@ -239,16 +233,16 @@ input[type="submit"] {
 
 /* mobile first */
 div#container {
-	width: 95%;
+    width: 95%;
 }
 
 nav ul li {
-	display: block;
-	border-bottom: 1px solid #303d11;
+    display: block;
+    border-bottom: 1px solid #303d11;
 }
 
 nav ul li:first-child {
-	border-top: 1px solid #303d11;
+    border-top: 1px solid #303d11;
 }
 
 label,input,textarea {
@@ -264,39 +258,39 @@ input {
 
 /* desktop */
 @media screen and (min-width: 650px) {
-	div#container {
-	max-width: 1000px;
-	}
-	nav ul {
-  	display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-  	display: -ms-flexbox;  /* TWEENER - IE 10 */
-  	display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-	display: flex;
-	-webkit-flex-direction: row;
-	-ms-flex-direction: row;
-	flex-direction: row;
-	box-sizing: border-box;
-	}
-	
-	nav ul li {
-	width: 33%;
-	margin: auto;
-	border: none;
-	}
-	nav ul li:first-child {
-	border: none;
-	}
-	nav ul li a {
-	text-align: center;
-	}
-	footer {
-		max-width: 1000px;
-	}
-	    .alert-danger {
+    div#container {
+        max-width: 1000px;
+    }
+    nav ul {
+        display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+        display: -ms-flexbox;  /* TWEENER - IE 10 */
+        display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        box-sizing: border-box;
+    }
+
+    nav ul li {
+        width: 33%;
+        margin: auto;
+        border: none;
+    }
+    nav ul li:first-child {
+        border: none;
+    }
+    nav ul li a {
+        text-align: center;
+    }
+    footer {
+        max-width: 1000px;
+    }
+    .alert-danger {
         width: 614px;
     }
     label,input,textarea {
-        display: inline-block; 
+        display: inline-block;
     }
     label {
         width: 100px;
@@ -310,10 +304,10 @@ input {
         margin-left: 112px;
     }
     textarea {
-        vertical-align: middle;    
+        vertical-align: middle;
     }
-	
-	
+
+
 }
 
 /*

@@ -1,5 +1,7 @@
 package ui.controller;
 
+
+import domain.model.User;
 import domain.service.UserService;
 
 public class HandlerFactory {
