@@ -1,5 +1,6 @@
 package domain.model;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -139,6 +140,11 @@ public class User {
                 throw new DomainException("No role selected");
             }
         }
+    }
+
+    public boolean isPasswordCorrect(String password) {
+        if (password != null && password.equals(this.password)) return true;
+        return false;
     }
 
     @Override

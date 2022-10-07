@@ -11,6 +11,13 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+
+<%
+    if (session.getAttribute("email") == null) {
+        response.sendRedirect("login.jsp");
+    }
+%>
+
 <div id="container">
     <header>
         <h1>

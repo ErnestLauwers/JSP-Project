@@ -12,6 +12,7 @@ import java.util.Map;
 public class UserService {
     private final Map<Integer, User> users = new HashMap<Integer, User>();
     private int userid = 1;    // als je later werkt met externe databank, wordt dit userid automatisch gegenereerd
+    private final ArrayList<String> usedEmails = new ArrayList<>();
 
     public UserService() {
         User director = new User("director@ucll.be", "t", "Andrew", "Johnson", Team.ALPHA);
@@ -40,6 +41,10 @@ public class UserService {
         if (users.containsKey(user.getUserid())) {
             throw new DbException("User already exists");
         }
+        if (usedEmails.contains(user.getEmail())) {
+            throw new DbException("Email already in use");
+        }
+        usedEmails.add(user.getEmail());
         user.setUserid(userid);   // user toevoegen geeft altijd nieuw userid
         users.put(user.getUserid(), user);
         userid++;
@@ -61,5 +66,16 @@ public class UserService {
 
     public int getNumberOfUsers() {
         return users.size();
+    }
+
+    public User getUserIfAuthenticated(String email, String password) {
+        for (User user: users.values()) {
+            if (user.getEmail().equalsIgnoreCase(email)) {
+                if (user.isPasswordCorrect(password)) {
+                    return user;
+                }
+            }
+        }
+        return null;
     }
 }

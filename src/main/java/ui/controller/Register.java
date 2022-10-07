@@ -27,8 +27,11 @@ public class Register extends RequestHandler {
             try{
                 getService().add(user);
             }catch (Exception e){
-                throw new DbException(e);
+                errors.add(e.getMessage());
+                request.setAttribute("errors", errors);
+                return "edit.jsp";
             }
+            request.setAttribute("errors", errors);
             request.setAttribute("users", getService().getAll());
             return "userOverview.jsp";
         }else{
