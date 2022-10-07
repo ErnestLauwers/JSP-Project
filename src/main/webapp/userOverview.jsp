@@ -40,8 +40,8 @@
                     <td>${user.email}</td>
                     <td>${user.team}</td>
                     <td>${user.role}</td>
-                    <td class="wijzig"><div class="knopWijzig"><a href="Controller?command=wijzigMain&bedrag=${bedrag.id}"><img src="images/wijzig.png" alt="wijzig"></a></div></td>
-                    <td class="verwijder"><div class="knopVerwijder"><a href="Controller?command=verwijderBedrag&bedrag=${bedrag.id}"><img src="images/verwijder.png" alt="verwijder"></a></div></td>
+                    <td class="wijzig"><div class="knopWijzig"><a href="Controller?command=StartEdit&id=${user.userid}"><img src="images/wijzig.png" alt="wijzig"></a></div></td>
+                    <td class="verwijder"><div class="knopVerwijder"><a href="Controller?command=DeleteConfirmation&id=${user.userid}"><img src="images/verwijder.png" alt="verwijder"></a></div></td>
                 </tr>
             </c:forEach>
             </tbody>

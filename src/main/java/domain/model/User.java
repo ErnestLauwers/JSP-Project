@@ -117,7 +117,7 @@ public class User {
             try {
                 this.team = Team.valueOf(team.toUpperCase());
             } catch (IllegalArgumentException e) {
-                throw new DomainException("There is no team with value " + team);
+                throw new DomainException("No team selected");
             }
         }
     }
@@ -128,6 +128,17 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public void setRole(String role) {
+        if (role == null);
+        else {
+            try {
+                this.role = Role.valueOf(role.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw new DomainException("No role selected");
+            }
+        }
     }
 
     @Override

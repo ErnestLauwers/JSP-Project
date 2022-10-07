@@ -4,47 +4,73 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.model.User;
-import domain.service.DbException;
 
 import java.util.ArrayList;
 
-public class Register extends RequestHandler {
+public class Edit extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        User user = new User();
+        ArrayList<String> errors = new ArrayList<String>();
+        String userId = request.getParameter("userId");
+        int id = Integer.parseInt(userId);
+        request.setAttribute("userToEdit", service.get(id));
+        User userE = service.get(id);
+        registerFirstName(request, userE, errors);
+        registerLastName(request, userE, errors);
+        registerEmail(request, userE, errors);
+        registerRole(request, userE, errors);
+        registerTeam(request, userE, errors);
+        try {
+            if (errors.isEmpty()) {
+                return "index.jsp";
+            }
+            else {
+                request.setAttribute("errors", errors);
+                return "edit.jsp";
+            }
+        } catch (IllegalArgumentException e) {
+            return "index.jsp)";
+        }
+
+/*
         ArrayList<String> errors = new ArrayList<>();
+        String id = request.getParameter("id");
+        User user = new User();
         try{
-            registerLastName(request, user, errors);
+            user.setUserid(Integer.parseInt(id));
             registerFirstName(request, user, errors);
+            registerLastName(request, user, errors);
             registerEmail(request, user, errors);
-            registerPassword(request, user, errors);
+            registerRole(request, user, errors);
             registerTeam(request, user, errors);
-        }catch (IllegalArgumentException e){
+        }catch (Exception e){
             errors.add(e.getMessage());
         }
         if (errors.size() == 0 ){
-            try{
-                getService().add(user);
-            }catch (Exception e){
-                throw new DbException(e);
+            service.update(user);
+            request.setAttribute("users", service.getAll());
+            try {
+                Controller.setSendRedirect();
+                response.sendRedirect("userOverview.jsp");
+            } catch (IOException e) {
+                throw new IllegalArgumentException(e);
             }
-            request.setAttribute("users", getService().getAll());
             return "userOverview.jsp";
         }else{
             if (errors.get(0).length() > 20) {
                 errors.remove(0);
             }
             request.setAttribute("errors", errors);
-            return "register.jsp";
-        }
+            return "edit.jsp";
+        }*/
     }
 
     private void registerFirstName(HttpServletRequest request, User user, ArrayList<String> errors) {
         String firstName = request.getParameter("firstName");
         try{
             user.setFirstName(firstName);
-            request.setAttribute("firstNameCorrect", firstName);
+            request.setAttribute("userToEditFirstName", firstName);
         }catch (Exception e){
             errors.add(e.getMessage());
         }
@@ -54,7 +80,7 @@ public class Register extends RequestHandler {
         String lastName = request.getParameter("lastName");
         try{
             user.setLastName(lastName);
-            request.setAttribute("lastNameCorrect", lastName);
+            request.setAttribute("userToEditLastName", lastName);
         }catch (Exception e){
             errors.add(e.getMessage());
         }
@@ -64,17 +90,17 @@ public class Register extends RequestHandler {
         String email = request.getParameter("email");
         try{
             user.setEmail(email);
-            request.setAttribute("emailCorrect", email);
+            request.setAttribute("userToEditEmail", email);
         }catch (Exception e){
             errors.add(e.getMessage());
         }
     }
 
-    private void registerPassword(HttpServletRequest request, User user, ArrayList<String> errors) {
-        String password = request.getParameter("password");
+    private void registerRole(HttpServletRequest request, User user, ArrayList<String> errors) {
+        String role = request.getParameter("role");
         try{
-            user.setPassword(password);
-            request.setAttribute("passwordCorrect", password);
+            user.setRole(role);
+            request.setAttribute("userToEditRole", role);
         }catch (Exception e){
             errors.add(e.getMessage());
         }
@@ -84,9 +110,11 @@ public class Register extends RequestHandler {
         String team = request.getParameter("team");
         try{
             user.setTeam(team);
-            request.setAttribute("teamCorrect", team);
+            request.setAttribute("userToEditTeam", team);
         }catch (Exception e){
             errors.add(e.getMessage());
         }
     }
+
+
 }

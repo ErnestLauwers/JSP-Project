@@ -6,7 +6,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="UTF-8">
-    <title>Sign Up</title>
+    <title>Edit</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -20,7 +20,7 @@
             <jsp:param name="hier" value=""/>
         </jsp:include>
         <h2>
-            Register
+            Edit user
         </h2>
         <hr class="solid">
     </header>
@@ -36,24 +36,27 @@
         </c:if>
         <section class="invulFormulier">
             <p class="please">Please fill in all input fields.</p>
-            <form method="post" action="Controller?command=Register" novalidate="novalidate">
+            <form method="post" action="Controller?command=Edit&userId=${requestScope.userToEdit.userid}" novalidate="novalidate">
                 <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName"
-                                                                 required value="${lastNameCorrect}"> </p>
+                                                                 required value="${userToEdit.lastName}"> </p>
                 <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName"
-                                                                   required value="${firstNameCorrect}"> </p>
-                <p><label for="email">Email</label><input type="email" id="email" name="email" required value="${emailCorrect}"></p>
-                <p><label for="password">Password</label><input type="password" id="password"  name="password"
-                                                                required value="${passwordCorrect}"> </p>
+                                                                   required value="${userToEdit.firstName}"> </p>
+                <p><label for="email">Email</label><input type="email" id="email" name="email" required value="${userToEdit.email}"></p>
+                <label for="role">Role</label>
+                <select name="role" id="role">
+                    <option value="employee">Employee</option>
+                    <option value="teamLeader">Team Leader</option>
+                    <option value="director">Director</option>
+                </select>
                 <label for="team">Team</label>
                 <select name="team" id="team">
-                    <option value="team">Team</option>
                     <option value="alpha">Alpha</option>
                     <option value="beta">Beta</option>
                     <option value="gamma">Gamma</option>
                     <option value="delta">Delta</option>
-                    <option value="Epsilon">Epsilon</option>
+                    <option value="epsilon">Epsilon</option>
                 </select>
-                <p><input type="submit" id="signUp" value="Sign Up"></p>
+                <p><input type="submit" id="edit" value="Edit user"></p>
             </form>
         </section>
     </main>
