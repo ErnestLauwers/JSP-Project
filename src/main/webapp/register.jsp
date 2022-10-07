@@ -2,22 +2,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
     <meta charset="UTF-8">
-    <title>Sign Up</title>
+    <title>Register</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-
-<%
-    if (session.getAttribute("email") == null) {
-        response.sendRedirect("login.jsp");
-    }
-%>
-
 <div id="container">
     <header>
         <h1>
@@ -41,7 +34,7 @@
                 </div>
             </c:forEach>
         </c:if>
-        <section class="invulFormulier">
+        <div class="invulFormulier">
             <p class="please">Please fill in all input fields.</p>
             <form method="post" action="Controller?command=Register" novalidate="novalidate">
                 <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName"
@@ -53,7 +46,6 @@
                                                                 required value="${passwordCorrect}"> </p>
                 <label for="team">Team</label>
                 <select name="team" id="team">
-                    <option value="team">Team</option>
                     <option value="alpha">Alpha</option>
                     <option value="beta">Beta</option>
                     <option value="gamma">Gamma</option>
@@ -62,7 +54,7 @@
                 </select>
                 <p><input type="submit" id="signUp" value="Sign Up"></p>
             </form>
-        </section>
+        </div>
     </main>
     <footer>
         <p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p>

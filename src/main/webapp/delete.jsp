@@ -2,9 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
     <meta charset="UTF-8">
     <title>Delete</title>
     <link rel="stylesheet" href="css/normalize.css">
@@ -31,18 +31,18 @@
             <p>id: #${requestScope.userToDelete.userid}</p>
 
         </div>
-        <section class="invulFormulierVerwijder">
+        <div class="invulFormulierVerwijder">
             <form action="Controller?command=Delete&id=${requestScope.userToDelete.userid}" method="post" novalidate>
                 <div class="invulVeldGroen">
-                    <input type="submit" name="Groen" value="Yes" id="submitJa">
+                    <input type="submit" name="Groen" value="Yes" id="submitYes">
                 </div>
             </form>
             <form action="Controller?command=Overview" method="post" novalidate>
                 <div class="invulVeldRood">
-                    <input type="submit" name="Rood" value="No" id="submitNee">
+                    <input type="submit" name="Rood" value="No" id="submitNo">
                 </div>
             </form>
-        </section>
+        </div>
     </main>
     <footer>
         <p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p>

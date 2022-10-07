@@ -1,3 +1,5 @@
+package ui.view;
+
 import static org.junit.Assert.*;
 
 import org.junit.After;
@@ -9,13 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-/* add dependency to your pom.xml 
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>5.0.0</version>
-        </dependency>
-*/
 
 public class SeleniumWorksWellTest {
 

@@ -1,8 +1,8 @@
 package domain.model;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import domain.service.UserService;
 
 public class User {
     private int userid = 0;

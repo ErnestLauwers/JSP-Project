@@ -30,40 +30,9 @@ public class Edit extends RequestHandler {
                 return "edit.jsp";
             }
         } catch (IllegalArgumentException e) {
+            request.setAttribute("errors", errors);
             return "index.jsp)";
         }
-
-/*
-        ArrayList<String> errors = new ArrayList<>();
-        String id = request.getParameter("id");
-        User user = new User();
-        try{
-            user.setUserid(Integer.parseInt(id));
-            registerFirstName(request, user, errors);
-            registerLastName(request, user, errors);
-            registerEmail(request, user, errors);
-            registerRole(request, user, errors);
-            registerTeam(request, user, errors);
-        }catch (Exception e){
-            errors.add(e.getMessage());
-        }
-        if (errors.size() == 0 ){
-            service.update(user);
-            request.setAttribute("users", service.getAll());
-            try {
-                Controller.setSendRedirect();
-                response.sendRedirect("userOverview.jsp");
-            } catch (IOException e) {
-                throw new IllegalArgumentException(e);
-            }
-            return "userOverview.jsp";
-        }else{
-            if (errors.get(0).length() > 20) {
-                errors.remove(0);
-            }
-            request.setAttribute("errors", errors);
-            return "edit.jsp";
-        }*/
     }
 
     private void registerFirstName(HttpServletRequest request, User user, ArrayList<String> errors) {
@@ -115,6 +84,4 @@ public class Edit extends RequestHandler {
             errors.add(e.getMessage());
         }
     }
-
-
 }

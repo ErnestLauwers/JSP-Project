@@ -2,9 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
     <meta charset="UTF-8">
     <title>Edit</title>
     <link rel="stylesheet" href="css/normalize.css">
@@ -34,7 +34,7 @@
                 </div>
             </c:forEach>
         </c:if>
-        <section class="invulFormulier">
+        <div class="invulFormulier">
             <p class="please">Please fill in all input fields.</p>
             <form method="post" action="Controller?command=Edit&userId=${requestScope.userToEdit.userid}" novalidate="novalidate">
                 <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName"
@@ -58,7 +58,7 @@
                 </select>
                 <p><input type="submit" id="edit" value="Edit user"></p>
             </form>
-        </section>
+        </div>
     </main>
     <footer>
         <p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p>

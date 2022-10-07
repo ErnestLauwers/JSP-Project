@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class UserService {
-    private final Map<Integer, User> users = new HashMap<Integer, User>();
+    public final Map<Integer, User> users = new HashMap<Integer, User>();
     private int userid = 1;    // als je later werkt met externe databank, wordt dit userid automatisch gegenereerd
     private final ArrayList<String> usedEmails = new ArrayList<>();
 
@@ -57,6 +57,10 @@ public class UserService {
         if (!users.containsKey(user.getUserid())) {
             throw new DbException("No user found");
         }
+        if (!usedEmails.contains(user.getEmail())) {
+            throw new DbException("Email already in use");
+        }
+        usedEmails.add(user.getEmail());
         users.put(user.getUserid(), user); // user updaten: userid blijft behouden
     }
 

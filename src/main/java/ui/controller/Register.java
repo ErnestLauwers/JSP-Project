@@ -29,7 +29,7 @@ public class Register extends RequestHandler {
             }catch (Exception e){
                 errors.add(e.getMessage());
                 request.setAttribute("errors", errors);
-                return "edit.jsp";
+                return "register.jsp";
             }
             request.setAttribute("errors", errors);
             request.setAttribute("users", getService().getAll());
