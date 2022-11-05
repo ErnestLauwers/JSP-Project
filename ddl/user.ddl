@@ -15,7 +15,7 @@ CREATE SEQUENCE groep2b5.user_id_seq;
 
 GRANT ALL ON SEQUENCE groep2b5.user_id_seq TO local_r0848777;
 
-CREATE TABLE groep2b5.user
+CREATE TABLE groep2b5.users
 (   userid integer NOT NULL DEFAULT nextval('groep2b5.user_id_seq'::regclass),
     email character varying COLLATE pg_catalog."default" NOT NULL,
     password character varying COLLATE pg_catalog."default" NOT NULL,
@@ -26,19 +26,19 @@ CREATE TABLE groep2b5.user
     CONSTRAINT user_pkey PRIMARY KEY (userid)
 );
 
-GRANT ALL ON TABLE groep2b5.user TO local_r0848777;
+GRANT ALL ON TABLE groep2b5.users TO local_r0848777;
 
-INSERT INTO groep2b5.user ("email","password","firstname","lastname","team","role") values ('director@ucll.be', 't', 'Andrew', 'Johnson', 'ALPHA', 'DIRECTOR');
-INSERT INTO groep2b5.user ("email","password","firstname","lastname","team","role") values ('bart.smith@gmail.com', 's', 'Bart', 'Smith', 'GAMMA', 'TEAMLEADER');
-INSERT INTO groep2b5.user ("email","password","firstname","lastname","team","role") values ('sarah.jones@gmail.com', 'u', 'Sarah', 'Jones', 'EPSILON', 'EMPLOYEE');
+INSERT INTO groep2b5.users ("email","password","firstname","lastname","team","role") values ('director@ucll.be', 't', 'Andrew', 'Johnson', 'ALPHA', 'DIRECTOR');
+INSERT INTO groep2b5.users ("email","password","firstname","lastname","team","role") values ('bart.smith@gmail.com', 's', 'Bart', 'Smith', 'GAMMA', 'TEAMLEADER');
+INSERT INTO groep2b5.users ("email","password","firstname","lastname","team","role") values ('sarah.jones@gmail.com', 'u', 'Sarah', 'Jones', 'EPSILON', 'EMPLOYEE');
 
 
 -- grant aan lectoren
 GRANT ALL ON SCHEMA groep2b5 TO local_u0015529;
 GRANT ALL ON SEQUENCE groep2b5.user_id_seq TO local_u0015529;
-GRANT ALL ON TABLE groep2b5.user TO local_u0015529;
+GRANT ALL ON TABLE groep2b5.users TO local_u0015529;
 
 -- grant aan teamgenoot
 GRANT ALL ON SCHEMA groep2b5 TO local_r0903727;
 GRANT ALL ON SEQUENCE groep2b5.user_id_seq TO local_r0903727;
-GRANT ALL ON TABLE groep2b5.user TO local_r0903727;
+GRANT ALL ON TABLE groep2b5.users TO local_r0903727;

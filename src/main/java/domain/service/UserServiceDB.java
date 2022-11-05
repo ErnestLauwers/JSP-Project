@@ -21,7 +21,7 @@ public class UserServiceDB implements UserService {
 
     @Override
     public User getUser(int userid) {
-        String query = String.format("SELECT * from %s.user WHERE id = (?)", schema);
+        String query = String.format("SELECT * from %s.users WHERE userid = (?)", schema);
 
         User user = null;
         try {
@@ -51,7 +51,7 @@ public class UserServiceDB implements UserService {
 
     @Override
     public User getUserIfAuthenticated(String email, String password) {
-        String query = String.format("SELECT * from %s.user where email = (?) and password = (?)");
+        String query = String.format("SELECT * from %s.users WHERE email = (?) and password = (?)", schema);
         User user = null;
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
@@ -59,16 +59,18 @@ public class UserServiceDB implements UserService {
             preparedStatement.setString(2, password);
             ResultSet result = preparedStatement.executeQuery();
 
-            int id = result.getInt("userid");
-            String firstname = result.getString("firstname");
-            String lastname = result.getString("lastname");
-            String teamname = result.getString("team");
-            String rolename = result.getString("role");
+            while (result.next()) {
+                int id = result.getInt("userid");
+                String firstname = result.getString("firstname");
+                String lastname = result.getString("lastname");
+                String teamname = result.getString("team");
+                String rolename = result.getString("role");
 
-            Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
-            Role role = Role.valueOf(rolename.toUpperCase(Locale.ROOT));
-            user = new User(id, email, password, firstname, lastname, team);
-            user.setRole(role);
+                Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
+                Role role = Role.valueOf(rolename.toUpperCase(Locale.ROOT));
+                user = new User(id, email, password, firstname, lastname, team);
+                user.setRole(role);
+            }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
@@ -77,7 +79,7 @@ public class UserServiceDB implements UserService {
 
     @Override
     public int getNumberOfUsers() {
-        String query = String.format("SELECT count(userid) as result from %s.user", schema);
+        String query = String.format("SELECT count(userid) as result from %s.users", schema);
         int numberOfUsers = 0;
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
@@ -91,7 +93,7 @@ public class UserServiceDB implements UserService {
 
     @Override
     public void update(User user) {
-        String query = String.format("update %s.user set email = (?), password = (?), firstName = (?), lastName = (?), team = (?), role = (?) where userid = (?)");
+        String query = String.format("update %s.users set email = (?), password = (?), firstname = (?), lastname = (?), team = (?), role = (?) WHERE userid = (?)", schema);
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
             preparedStatement.setString(1, user.getEmail());
@@ -109,10 +111,11 @@ public class UserServiceDB implements UserService {
 
     @Override
     public void deleteUser(int id) {
-        String query = String.format("delete from %s.user where userid = id");
+        String query = String.format("delete from %s.users where userid = (?)", schema);
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
-            ResultSet result = preparedStatement.executeQuery();
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
@@ -120,7 +123,7 @@ public class UserServiceDB implements UserService {
 
     @Override
     public void addUser(User user) {
-        String query = String.format("insert into %s.user (email, password, firstName, lastName, team, role) values (?, ?, ?, ?, ?, ?)", schema);
+        String query = String.format("insert into %s.users (email, password, firstName, lastName, team, role) values (?, ?, ?, ?, ?, ?)", schema);
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
             preparedStatement.setString(1, user.getEmail());
@@ -138,7 +141,7 @@ public class UserServiceDB implements UserService {
     @Override
     public ArrayList<User> getAllUsers() {
         ArrayList<User> users = new ArrayList<>();
-        String query = String.format("SELECT * from %s.user", schema);
+        String query = String.format("SELECT * from %s.users", schema);
         try {
             PreparedStatement statement = getConnection().prepareStatement(query);
             ResultSet result = statement.executeQuery();

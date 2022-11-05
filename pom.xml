@@ -51,6 +51,11 @@
             <artifactId>webdrivermanager</artifactId>
             <version>5.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.23.jre7</version>
+        </dependency>
     </dependencies>
 
     <build>
