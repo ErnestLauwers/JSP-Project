@@ -2,7 +2,6 @@ package domain.model;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import domain.service.UserService;
 
 public class User {
     private int userid = 0;
@@ -60,7 +59,7 @@ public class User {
         return email;
     }
 
-    private String getPassword() {
+    public String getPassword() {
         return password;
     }
 

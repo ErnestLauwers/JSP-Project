@@ -7,7 +7,7 @@ public class Overview extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("users", service.getAll());
+        request.setAttribute("users", service.getAllUsers());
         return "userOverview.jsp";
     }
 

@@ -1,85 +1,22 @@
 package domain.service;
 
-import domain.model.Team;
-import domain.model.Role;
 import domain.model.User;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-public class UserService {
-    public final Map<Integer, User> users = new HashMap<Integer, User>();
-    private int userid = 1;    // als je later werkt met externe databank, wordt dit userid automatisch gegenereerd
-    private final ArrayList<String> usedEmails = new ArrayList<>();
+public interface UserService {
 
-    public UserService() {
-        User director = new User("director@ucll.be", "t", "Andrew", "Johnson", Team.ALPHA);
-        director.setRole(Role.DIRECTOR);
-        add(director);
-        User employeeOne = new User("bart.smith@gmail.com", "s", "Bart", "Smith", Team.GAMMA);
-        employeeOne.setRole(Role.TEAMLEADER);
-        add(employeeOne);
-        User employeeTwo = new User("sarah.jones@gmail.com", "u", "Sarah", "Jones", Team.EPSILON);
-        employeeTwo.setRole(Role.EMPLOYEE);
-        add(employeeTwo);
-    }
+    public User getUser(int userid);
 
-    public User get(int userid) {
-        return users.get(userid);
-    }
+    public ArrayList<User> getAllUsers();
 
-    public List<User> getAll() {
-        return new ArrayList<User>(users.values());
-    }
+    public void addUser(User user);
 
-    public void add(User user) {
-        if (user == null) {
-            throw new DbException("No user given");
-        }
-        if (users.containsKey(user.getUserid())) {
-            throw new DbException("User already exists");
-        }
-        if (usedEmails.contains(user.getEmail())) {
-            throw new DbException("Email already in use");
-        }
-        usedEmails.add(user.getEmail());
-        user.setUserid(userid);   // user toevoegen geeft altijd nieuw userid
-        users.put(user.getUserid(), user);
-        userid++;
-    }
+    public void update(User user);
 
-    public void update(User user) {
-        if (user == null) {
-            throw new DbException("No user given");
-        }
-        if (!users.containsKey(user.getUserid())) {
-            throw new DbException("No user found");
-        }
-        if (!usedEmails.contains(user.getEmail())) {
-            throw new DbException("Email already in use");
-        }
-        usedEmails.add(user.getEmail());
-        users.put(user.getUserid(), user); // user updaten: userid blijft behouden
-    }
+    public void deleteUser(int id);
 
-    public void delete(int userid) {
-        users.remove(userid);   // userid gaat verloren, maar wordt niet ingenomen door eventuele nieuwe user
-    }
+    public int getNumberOfUsers();
 
-    public int getNumberOfUsers() {
-        return users.size();
-    }
+    public User getUserIfAuthenticated(String email, String password);
 
-    public User getUserIfAuthenticated(String email, String password) {
-        for (User user: users.values()) {
-            if (user.getEmail().equalsIgnoreCase(email)) {
-                if (user.isPasswordCorrect(password)) {
-                    return user;
-                }
-            }
-        }
-        return null;
-    }
 }

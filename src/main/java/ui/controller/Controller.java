@@ -1,6 +1,8 @@
 package ui.controller;
 
 
+import domain.service.AppService;
+
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,13 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.service.UserService;
-
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private UserService service = new UserService();
+    private AppService service = new AppService();
     private HandlerFactory handlerFactory = new HandlerFactory();
     private static boolean sendRedirect = false;
 

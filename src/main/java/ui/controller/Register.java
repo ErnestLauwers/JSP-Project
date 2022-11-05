@@ -25,14 +25,14 @@ public class Register extends RequestHandler {
         }
         if (errors.size() == 0 ){
             try{
-                getService().add(user);
+                getService().addUser(user);
             }catch (Exception e){
                 errors.add(e.getMessage());
                 request.setAttribute("errors", errors);
                 return "register.jsp";
             }
             request.setAttribute("errors", errors);
-            request.setAttribute("users", getService().getAll());
+            request.setAttribute("users", getService().getAllUsers());
             return "userOverview.jsp";
         }else{
             if (errors.get(0).length() > 20) {

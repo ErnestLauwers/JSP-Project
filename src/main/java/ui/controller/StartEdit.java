@@ -9,7 +9,7 @@ public class StartEdit extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         String userId = request.getParameter("id");
         int id = Integer.parseInt(userId);
-        request.setAttribute("userToEdit", service.get(id));
+        request.setAttribute("userToEdit", service.getUser(id));
         return "edit.jsp";
     }
 }

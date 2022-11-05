@@ -8,7 +8,7 @@ public class DeleteConfirmation extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         String userId = request.getParameter("id");
         int id = Integer.parseInt(userId);
-        request.setAttribute("userToDelete", service.get(id));
+        request.setAttribute("userToDelete", service.getUser(id));
         return "delete.jsp";
     }
 }

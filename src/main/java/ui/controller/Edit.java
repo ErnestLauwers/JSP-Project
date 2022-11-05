@@ -14,8 +14,8 @@ public class Edit extends RequestHandler {
         ArrayList<String> errors = new ArrayList<String>();
         String userId = request.getParameter("userId");
         int id = Integer.parseInt(userId);
-        request.setAttribute("userToEdit", service.get(id));
-        User userE = service.get(id);
+        request.setAttribute("userToEdit", service.getUser(id));
+        User userE = service.getUser(id);
         registerFirstName(request, userE, errors);
         registerLastName(request, userE, errors);
         registerEmail(request, userE, errors);
