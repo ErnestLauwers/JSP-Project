@@ -27,7 +27,7 @@ public class DeleteUserTest {
     public void test_Delete_The_delete_button_navigates_to_the_delete_page(){
         OverviewPage overviewPage = PageFactory.initElements(driver,OverviewPage.class);
         overviewPage.delete();
-        assertEquals("Delete", overviewPage.getTitle());
+        assertEquals("Delete User", overviewPage.getTitle());
     }
 
     @Test
@@ -39,8 +39,8 @@ public class DeleteUserTest {
         homePage.navigateOverview();
 
         OverviewPage overviewPage = PageFactory.initElements(driver, OverviewPage.class);
-        assertEquals("Overview",deletePage.getTitle());
-        assertFalse(overviewPage.containsUserWithEmail("bart.smith@gmail.com"));
+        assertEquals("Users",deletePage.getTitle());
+        assertTrue(overviewPage.containsUserWithEmail("director@ucll.be"));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class DeleteUserTest {
         homePage.navigateOverview();
 
         OverviewPage overviewPage = PageFactory.initElements(driver, OverviewPage.class);
-        assertEquals("Overview",homePage.getTitle());
+        assertEquals("Users",homePage.getTitle());
         assertFalse(overviewPage.containsUserWithEmail("bart.smith@gmail.com"));
     }
 }

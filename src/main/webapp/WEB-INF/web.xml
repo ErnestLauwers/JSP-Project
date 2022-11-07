@@ -11,4 +11,7 @@
         <param-name>schema</param-name>
         <param-value>groep2b5</param-value>
     </context-param>
+    <welcome-file-list>
+        <welcome-file>Controller</welcome-file>
+    </welcome-file-list>
 </web-app>

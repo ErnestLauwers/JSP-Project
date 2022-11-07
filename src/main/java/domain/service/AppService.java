@@ -1,8 +1,10 @@
 package domain.service;
 
+import domain.model.Project;
 import domain.model.User;
 import domain.model.WorkOrder;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class AppService {
@@ -10,6 +12,8 @@ public class AppService {
     private UserService users = new UserServiceDB();
 
     private WorkOrderService workOrders = new WorkOrderServiceDB();
+
+    private ProjectService projects = new ProjectServiceDB();
 
     public User getUser(int userid) {
         return users.getUser(userid);
@@ -61,5 +65,31 @@ public class AppService {
 
     public int getNumberOfWorkOrders() {
         return workOrders.getNumberOfWorkOrders();
+    }
+
+    public ArrayList<WorkOrder> sortAllWorkOrdersDescending() {return workOrders.sortAllWorkOrdersDescending();}
+
+    public ArrayList<WorkOrder> sortAllWorkOrdersAscending() {return workOrders.sortAllWorkOrdersAscending();}
+
+    public ArrayList<WorkOrder> getWorkOrdersWithId(int userId) {return workOrders.getWorkOrdersWithId(userId);}
+
+    public ArrayList<Project> getAllProjects() {
+        return projects.getAllProjects();
+    }
+
+    public void addProject(Project project) {
+        projects.addProject(project);
+    }
+
+    public void deleteProject(int projectid) {
+        projects.deleteProject(projectid);
+    }
+
+    public Project getProject(int projectid) {
+        return projects.getProject(projectid);
+    }
+
+    public void update(Project project) {
+        projects.update(project);
     }
 }

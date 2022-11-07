@@ -6,58 +6,28 @@ import domain.model.Team;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class AddProject extends RequestHandler {
+public class EditProject extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        Project project = new Project();
+        String projectid = request.getParameter("projectId");
+        int id = Integer.parseInt(projectid);
         ArrayList<String> errors = new ArrayList<>();
-        try {
-            registerName(request, project, errors);
-            registerTeam(request, project, errors);
-            registerStartDate(request, project, errors);
-            registerEndDate(request, project, errors);
-        } catch (IllegalArgumentException e) {
-            errors.add(e.getMessage());
-        }
-        if (errors.size() == 0) {
-            getService().addProject(project);
-            request.setAttribute("projects", getService().getAllProjects());
+        Project project = service.getProject(id);
+        registerStartDate(request, project, errors);
+        registerEndDate(request, project, errors);
+        if (errors.isEmpty()) {
+            getService().update(project);
+            request.setAttribute("projects", service.getAllProjects());
             return "projects.jsp";
-        } else {
+        }
+        else {
             request.setAttribute("errors", errors);
-            return "addProject.jsp";
-        }
-
-    }
-
-    private void registerName(HttpServletRequest request, Project project, ArrayList<String> errors) {
-        String name = request.getParameter("projectName");
-        try {
-            for (Project p: service.getAllProjects()) {
-                if (p.getName().equals(name)) throw new IllegalArgumentException("There is already a project with this name!");
-            }
-            project.setName(name);
-            request.setAttribute("correctName", name);
-        } catch (Exception e) {
-            errors.add(e.getMessage());
-        }
-    }
-
-    private void registerTeam(HttpServletRequest request, Project project, ArrayList<String> errors) {
-        try {
-            HttpSession session = request.getSession();
-            String team = session.getAttribute("userTeam").toString();
-            Team teamName = Team.valueOf(team.toUpperCase(Locale.ROOT));
-            project.setTeam(teamName);
-            request.setAttribute("correctTeam", teamName);
-        } catch (Exception e) {
-            errors.add(e.getMessage());
+            return "editProject.jsp";
         }
     }
 
@@ -91,3 +61,4 @@ public class AddProject extends RequestHandler {
     }
 
 }
+

@@ -12,6 +12,7 @@ public class WorkOrder {
     private LocalTime startTime;
     private LocalTime endTime;
     private String description;
+    private int userId;
 
     public WorkOrder(String name, Team team, LocalDate date, LocalTime startTime, LocalTime endTime, String description) {
         this.setWorkOrderId(workOrderId++);
@@ -21,9 +22,10 @@ public class WorkOrder {
         this.setStartTime(startTime);
         this.setEndTime(endTime);
         this.setDescription(description);
+        this.setUserId(userId);
     }
 
-    public WorkOrder(int workOrderId, String name, Team team, LocalDate date, LocalTime startTime, LocalTime endTime, String description) {
+    public WorkOrder(int workOrderId, String name, Team team, LocalDate date, LocalTime startTime, LocalTime endTime, String description, int userId) {
         this.setWorkOrderId(workOrderId);
         this.setName(name);
         this.setTeam(team);
@@ -31,9 +33,21 @@ public class WorkOrder {
         this.setStartTime(startTime);
         this.setEndTime(endTime);
         this.setDescription(description);
+        this.setUserId(userId);
     }
 
     public WorkOrder() {
+    }
+
+    public void setUserId(int id) {
+        if (id < 1) {
+            throw new IllegalArgumentException("The user id must be positive");
+        }
+        this.userId = id;
+    }
+
+    public int getUserId() {
+        return this.userId;
     }
 
     public void setWorkOrderId(int workOrderId) {

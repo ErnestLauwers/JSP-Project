@@ -4,14 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class EditPage extends RegisterPage{
+public class EditWorkOrderPage extends AddWorkOrderPage{
 
-    public EditPage(WebDriver driver) {
+    public EditWorkOrderPage(WebDriver driver) {
         super(driver);
-        this.driver.get(Config.BASE_URL+"Controller?command=StartEdit&id=7");
+        this.driver.get(Config.BASE_URL+"Controller?command=EditWorkOrderPage&workOrderId=28");
     }
 
-    @FindBy(id = "edit")
+    @FindBy(id = "signUp")
     private WebElement editButton;
 
     public void edit()

@@ -21,6 +21,7 @@ public class Login extends RequestHandler {
             session.setAttribute("userTeam", user.getTeam());
             session.setAttribute("email", email);
             session.setAttribute("firstName", user.getFirstName());
+            session.setAttribute("userId", user.getUserid());
             return "index.jsp";
         } else {
             String error = "No valid email/password";

@@ -42,11 +42,11 @@ public class EditUserTest {
     @Test
     public void test_Edit_with_correct_parameters_edits_user_successfully(){
         EditPage editPage = PageFactory.initElements(driver,EditPage.class);
-        editPage.setEmailField("lauwers.ernest@gmail.com");
+        editPage.setEmailField("employee@ucll.be");
         editPage.edit();
 
         OverviewPage overviewPage = PageFactory.initElements(driver, OverviewPage.class);
-        assertEquals("Overview",overviewPage.getTitle());
-        assertTrue(overviewPage.containsUserWithEmail("lauwers.ernest@gmail.com"));
+        assertEquals("Users",overviewPage.getTitle());
+        assertTrue(overviewPage.containsUserWithEmail("employee@ucll.be"));
     }
 }

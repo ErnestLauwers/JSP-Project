@@ -6,7 +6,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" >
     <meta charset="UTF-8">
-    <title>Delete User</title>
+    <title>Delete Project</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -20,24 +20,24 @@
             <jsp:param name="hier" value=""/>
         </jsp:include>
         <h2>
-            Delete user
+            Delete Project
         </h2>
         <hr class="solid">
     </header>
     <main>
-        <h3>Are you sure you want to delete this user?</h3>
+        <h3>Are you sure you want to delete this project?</h3>
         <div class="inhoudVerwijder">
-            <p>${requestScope.userToDelete.lastName} ${requestScope.userToDelete.firstName}</p>
-            <p>id: #${requestScope.userToDelete.userid}</p>
-
+            <p>Project name: ${requestScope.projectToDelete.name}</p>
+            <p>Startdate: ${requestScope.projectToDelete.startDate} Enddate: ${requestScope.projectToDelete.endDate}</p>
+            <p>Project Id: #${requestScope.projectToDelete.projectId}</p>
         </div>
         <div class="invulFormulierVerwijder">
-            <form action="Controller?command=Delete&id=${requestScope.userToDelete.userid}" method="post" novalidate>
+            <form action="Controller?command=DeleteProject&projectid=${requestScope.projectToDelete.projectId}" method="post" novalidate>
                 <div class="invulVeldGroen">
                     <input type="submit" name="Groen" value="Yes" id="submitYes">
                 </div>
             </form>
-            <form action="Controller?command=Overview" method="post" novalidate>
+            <form action="Controller?command=Projects" method="post" novalidate>
                 <div class="invulVeldRood">
                     <input type="submit" name="Rood" value="No" id="submitNo">
                 </div>

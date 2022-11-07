@@ -1,11 +1,10 @@
 package ui.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import domain.model.DomainException;
 import domain.model.WorkOrder;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -33,8 +32,9 @@ public class EditWorkOrder extends RequestHandler {
                 return "editWorkOrder.jsp";
             }
         } catch (IllegalArgumentException e) {
+            getService().update(workOrderE);
             request.setAttribute("errors", errors);
-            return "index.jsp)";
+            return "index.jsp";
         }
     }
 

@@ -4,6 +4,7 @@ import domain.model.Team;
 import domain.model.WorkOrder;
 import util.DbConnectionService;
 
+import javax.servlet.http.HttpSession;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -35,24 +36,84 @@ public class WorkOrderServiceDB implements WorkOrderService{
                 int workorderId = result.getInt("workorderid");
                 String name = result.getString("name");
                 String teamname = result.getString("team");
-                String date = result.getString("date");
-                String starttime = result.getString("starttime");
-                String endtime = result.getString("endtime");
+                Timestamp date = result.getTimestamp("date");
+                Time starttime = result.getTime("starttime");
+                Time endtime = result.getTime("endtime");
                 String description = result.getString("description");
+                int userid = result.getInt("userid");
 
+                String dateCor = date.toString();
+                String years = dateCor.substring(0, 4);
+                String months = dateCor.substring(5, 7);
+                String days = dateCor.substring(8, 10);
+                String date3 = days + "/" + months + "/" + years;
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate date2 = LocalDate.parse(date, formatter);
+                LocalDate date4 = LocalDate.parse(date3, formatter);
+
+                String startTimeCorrect = starttime.toString();
+                String endTimeCorrect = endtime.toString();
+                String startTimeCorrect2 = startTimeCorrect.substring(0, 5);
+                String endTimeCorrect2 = endTimeCorrect.substring(0, 5);
                 DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
-                LocalTime starttime2 = LocalTime.parse(starttime, formatter2);
-                LocalTime endtime2 = LocalTime.parse(endtime, formatter2);
+                LocalTime starttime2 = LocalTime.parse(startTimeCorrect2, formatter2);
+                LocalTime endtime2 = LocalTime.parse(endTimeCorrect2, formatter2);
+
                 Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
 
-                workOrder = new WorkOrder(workorderId, name, team, date2, starttime2, endtime2, description);
+                workOrder = new WorkOrder(workorderId, name, team, date4, starttime2, endtime2, description, userid);
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
         return workOrder;
+    }
+
+    @Override
+    public ArrayList<WorkOrder> getWorkOrdersWithId(int userId) {
+        ArrayList<WorkOrder> workOrders = new ArrayList<>();
+        String query = String.format("SELECT * from %s.workorders WHERE userid = (?)", schema);
+
+        WorkOrder workOrder = null;
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(query);
+            preparedStatement.setInt(1, userId);
+            ResultSet result = preparedStatement.executeQuery();
+
+            while (result.next()) {
+                int workorderId = result.getInt("workorderid");
+                String name = result.getString("name");
+                String teamname = result.getString("team");
+                Timestamp date = result.getTimestamp("date");
+                Time starttime = result.getTime("starttime");
+                Time endtime = result.getTime("endtime");
+                String description = result.getString("description");
+                int userid = result.getInt("userid");
+
+                String dateCor = date.toString();
+                String years = dateCor.substring(0, 4);
+                String months = dateCor.substring(5, 7);
+                String days = dateCor.substring(8, 10);
+                String date3 = days + "/" + months + "/" + years;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate date4 = LocalDate.parse(date3, formatter);
+
+                String startTimeCorrect = starttime.toString();
+                String endTimeCorrect = endtime.toString();
+                String startTimeCorrect2 = startTimeCorrect.substring(0, 5);
+                String endTimeCorrect2 = endTimeCorrect.substring(0, 5);
+                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
+                LocalTime starttime2 = LocalTime.parse(startTimeCorrect2, formatter2);
+                LocalTime endtime2 = LocalTime.parse(endTimeCorrect2, formatter2);
+
+                Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
+
+                workOrder = new WorkOrder(workorderId, name, team, date4, starttime2, endtime2, description, userid);
+                workOrders.add(workOrder);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        return workOrders;
     }
 
     @Override
@@ -71,23 +132,20 @@ public class WorkOrderServiceDB implements WorkOrderService{
 
     @Override
     public void update(WorkOrder workOrder) {
-        String query = String.format("update %s.workorders set name = (?), team = (?), date = (?), starttime = (?), endtime = (?), description = (?) WHERE workorderid = (?)", schema);
+        String query = String.format("update %s.workorders set starttime = (?), endtime = (?), description = (?) WHERE workorderid = (?)", schema);
         try {
-            String teamName = workOrder.getTeam().getStringValue().substring(0,1).toUpperCase(Locale.ROOT) + workOrder.getTeam().getStringValue().substring(1).toLowerCase(Locale.ROOT);
-            String date = workOrder.getDate().toString();
-            String years = date.substring(0, 4);
-            String months = date.substring(5, 7);
-            String days = date.substring(date.length() - 2);
-            String date3 = days + "/" + months + "/" + years;
-            Timestamp timestampDate = Timestamp.valueOf(date3);
+            String startTime = workOrder.getStartTime().toString();
+            startTime = startTime + ":00";
+            String endTime = workOrder.getEndTime().toString();
+            endTime = endTime + ":00";
+            Time startTimeCorrect = Time.valueOf(startTime);
+            Time endTimeCorrect = Time.valueOf(endTime);
+
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
-            preparedStatement.setString(1, workOrder.getName());
-            preparedStatement.setString(2, teamName);
-            preparedStatement.setTimestamp(3, timestampDate);
-            preparedStatement.setString(4, workOrder.getStartTime().toString());
-            preparedStatement.setString(5, workOrder.getEndTime().toString());
-            preparedStatement.setString(6, workOrder.getDescription());
-            preparedStatement.setInt(7, workOrder.getWorkOrderId());
+            preparedStatement.setTime(1, startTimeCorrect);
+            preparedStatement.setTime(2, endTimeCorrect);
+            preparedStatement.setString(3,  workOrder.getDescription());
+            preparedStatement.setInt(4, workOrder.getWorkOrderId());
             preparedStatement.execute();
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -108,18 +166,18 @@ public class WorkOrderServiceDB implements WorkOrderService{
 
     @Override
     public void addWorkOrder(WorkOrder workOrder) {
-        String query = String.format("insert into %s.workorders (name, team, date, starttime, endtime, description) values (?, ?, ?, ?, ?, ?)", schema);
+        String query = String.format("insert into %s.workorders (name, team, date, starttime, endtime, description, userid) values (?, ?, ?, ?, ?, ?, ?)", schema);
         try {
             String teamName = workOrder.getTeam().getStringValue().substring(0,1).toUpperCase(Locale.ROOT) + workOrder.getTeam().getStringValue().substring(1).toLowerCase(Locale.ROOT);
-            String date = workOrder.getDate().toString();/*
-            String years = date.substring(0, 4);
-            String months = date.substring(5, 7);
-            String days = date.substring(date.length() - 2);
-            String date3 = days + "/" + months + "/" + years;*/
+            String date = workOrder.getDate().toString();
             String date4 = date + " 00:00:00";
+            String startTime = workOrder.getStartTime().toString();
+            startTime = startTime + ":00";
+            String endTime = workOrder.getEndTime().toString();
+            endTime = endTime + ":00";
             Timestamp timestampDate = Timestamp.valueOf(date4);
-            Time startTimeCorrect = Time.valueOf(workOrder.getStartTime().toString());
-            Time endTimeCorrect = Time.valueOf(workOrder.getEndTime().toString());
+            Time startTimeCorrect = Time.valueOf(startTime);
+            Time endTimeCorrect = Time.valueOf(endTime);
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
             preparedStatement.setString(1, workOrder.getName());
             preparedStatement.setString(2, teamName);
@@ -127,6 +185,7 @@ public class WorkOrderServiceDB implements WorkOrderService{
             preparedStatement.setTime(4, startTimeCorrect);
             preparedStatement.setTime(5, endTimeCorrect);
             preparedStatement.setString(6, workOrder.getDescription());
+            preparedStatement.setInt(7, workOrder.getUserId());
             preparedStatement.execute();
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -148,6 +207,7 @@ public class WorkOrderServiceDB implements WorkOrderService{
                 Time starttime = result.getTime("starttime");
                 Time endtime = result.getTime("endtime");
                 String description = result.getString("description");
+                int userid = result.getInt("userid");
 
                 String dateCor = date.toString();
                 String years = dateCor.substring(0, 4);
@@ -165,13 +225,97 @@ public class WorkOrderServiceDB implements WorkOrderService{
                 LocalTime endtime2 = LocalTime.parse(endTimeCorrect2, formatter2);
                 Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
 
-                WorkOrder workOrder = new WorkOrder(workorderId, name, team, date4, starttime2, endtime2, description);
+                WorkOrder workOrder = new WorkOrder(workorderId, name, team, date4, starttime2, endtime2, description, userid);
                 workOrders.add(workOrder);
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
         return workOrders;
+    }
+
+    @Override
+    public ArrayList<WorkOrder> sortAllWorkOrdersDescending() {
+        ArrayList<WorkOrder> sortedWorkOrders = new ArrayList<>();
+        String query = String.format("select * from %s.workorders order by date desc, starttime desc", schema);
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(query);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int workorderId = result.getInt("workorderid");
+                String name = result.getString("name");
+                String teamname = result.getString("team");
+                Timestamp date = result.getTimestamp("date");
+                Time starttime = result.getTime("starttime");
+                Time endtime = result.getTime("endtime");
+                String description = result.getString("description");
+                int userid = result.getInt("userid");
+
+                String dateCor = date.toString();
+                String years = dateCor.substring(0, 4);
+                String months = dateCor.substring(5, 7);
+                String days = dateCor.substring(8, 10);
+                String date3 = days + "/" + months + "/" + years;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate date4 = LocalDate.parse(date3, formatter);
+                String startTimeCorrect = starttime.toString();
+                String endTimeCorrect = endtime.toString();
+                String startTimeCorrect2 = startTimeCorrect.substring(0, 5);
+                String endTimeCorrect2 = endTimeCorrect.substring(0, 5);
+                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("H:mm");
+                LocalTime starttime2 = LocalTime.parse(startTimeCorrect2, formatter2);
+                LocalTime endtime2 = LocalTime.parse(endTimeCorrect2, formatter2);
+                Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
+
+                WorkOrder workOrder = new WorkOrder(workorderId, name, team, date4, starttime2, endtime2, description, userid);
+                sortedWorkOrders.add(workOrder);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        return sortedWorkOrders;
+    }
+
+    @Override
+    public ArrayList<WorkOrder> sortAllWorkOrdersAscending() {
+        ArrayList<WorkOrder> sortedWorkOrders = new ArrayList<>();
+        String query = String.format("select * from %s.workorders order by date asc, starttime asc", schema);
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(query);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int workorderId = result.getInt("workorderid");
+                String name = result.getString("name");
+                String teamname = result.getString("team");
+                Timestamp date = result.getTimestamp("date");
+                Time starttime = result.getTime("starttime");
+                Time endtime = result.getTime("endtime");
+                String description = result.getString("description");
+                int userid = result.getInt("userid");
+
+                String dateCor = date.toString();
+                String years = dateCor.substring(0, 4);
+                String months = dateCor.substring(5, 7);
+                String days = dateCor.substring(8, 10);
+                String date3 = days + "/" + months + "/" + years;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate date4 = LocalDate.parse(date3, formatter);
+                String startTimeCorrect = starttime.toString();
+                String endTimeCorrect = endtime.toString();
+                String startTimeCorrect2 = startTimeCorrect.substring(0, 5);
+                String endTimeCorrect2 = endTimeCorrect.substring(0, 5);
+                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("H:mm");
+                LocalTime starttime2 = LocalTime.parse(startTimeCorrect2, formatter2);
+                LocalTime endtime2 = LocalTime.parse(endTimeCorrect2, formatter2);
+                Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
+
+                WorkOrder workOrder = new WorkOrder(workorderId, name, team, date4, starttime2, endtime2, description, userid);
+                sortedWorkOrders.add(workOrder);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        return sortedWorkOrders;
     }
 
     /**

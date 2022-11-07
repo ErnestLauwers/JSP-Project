@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.model.User;
-import domain.service.DbException;
 
 import java.util.ArrayList;
 

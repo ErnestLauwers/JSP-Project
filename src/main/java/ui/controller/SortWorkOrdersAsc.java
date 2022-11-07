@@ -3,12 +3,12 @@ package ui.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Projects extends RequestHandler {
+public class SortWorkOrdersAsc extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("projects", service.getAllProjects());
-        return "projects.jsp";
+        request.setAttribute("workOrders", service.sortAllWorkOrdersAscending());
+        return "workOrders.jsp";
     }
 
 }

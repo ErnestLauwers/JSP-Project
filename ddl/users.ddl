@@ -29,8 +29,8 @@ CREATE TABLE groep2b5.users
 GRANT ALL ON TABLE groep2b5.users TO local_r0848777;
 
 INSERT INTO groep2b5.users ("email","password","firstname","lastname","team","role") values ('director@ucll.be', 't', 'Andrew', 'Johnson', 'ALPHA', 'DIRECTOR');
-INSERT INTO groep2b5.users ("email","password","firstname","lastname","team","role") values ('bart.smith@gmail.com', 's', 'Bart', 'Smith', 'GAMMA', 'TEAMLEADER');
-INSERT INTO groep2b5.users ("email","password","firstname","lastname","team","role") values ('sarah.jones@gmail.com', 'u', 'Sarah', 'Jones', 'EPSILON', 'EMPLOYEE');
+INSERT INTO groep2b5.users ("email","password","firstname","lastname","team","role") values ('teamleader@ucll.be', 't', 'Bart', 'Smith', 'BETA', 'TEAMLEADER');
+INSERT INTO groep2b5.users ("email","password","firstname","lastname","team","role") values ('employee@ucll.be', 't', 'Sarah', 'Jones', 'BETA', 'EMPLOYEE');
 
 
 -- grant aan lectoren

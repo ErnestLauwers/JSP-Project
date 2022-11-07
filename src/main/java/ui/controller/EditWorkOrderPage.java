@@ -13,6 +13,7 @@ public class EditWorkOrderPage extends RequestHandler {
         request.setAttribute("endTimeCorrect", service.getWorkOrder(id).getEndTime());
         request.setAttribute("descriptionCorrect", service.getWorkOrder(id).getDescription());
         request.setAttribute("workOrderToEdit", service.getWorkOrder(id));
+        request.setAttribute("workOrderId", workOrderId);
         return "editWorkOrder.jsp";
     }
 }

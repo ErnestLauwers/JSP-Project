@@ -23,6 +23,9 @@ public class HomePage extends Page {
     @FindBy(id = "overviewNav")
     private WebElement overviewNav;
 
+    @FindBy(id = "workOrdersNav")
+    private WebElement workOrdersNav;
+
     public void setMailField(String mail) {
         this.emailField.clear();
         this.emailField.sendKeys(mail);
@@ -45,5 +48,9 @@ public class HomePage extends Page {
 
     public void navigateOverview() {
         this.overviewNav.click();
+    }
+
+    public void navigateWorkOrders() {
+        this.workOrdersNav.click();
     }
 }

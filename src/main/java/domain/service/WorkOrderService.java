@@ -2,6 +2,7 @@ package domain.service;
 
 import domain.model.WorkOrder;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public interface WorkOrderService {
@@ -18,4 +19,9 @@ public interface WorkOrderService {
 
     public int getNumberOfWorkOrders();
 
+    public ArrayList<WorkOrder> sortAllWorkOrdersDescending();
+
+    public ArrayList<WorkOrder> sortAllWorkOrdersAscending();
+
+    public ArrayList<WorkOrder> getWorkOrdersWithId(int userId);
 }

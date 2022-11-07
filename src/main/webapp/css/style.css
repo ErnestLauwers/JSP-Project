@@ -319,6 +319,24 @@ input[type="submit"] {
     width: 50%;
 }
 
+.descasc {
+    text-align: center;
+}
+
+.desc, .asc {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.asc {
+    padding-right: 1rem;
+}
+
+.sortBox {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
 /* mobile first */
 div#container {
     width: 95%;
