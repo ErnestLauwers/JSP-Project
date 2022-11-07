@@ -16,6 +16,9 @@ public class Login extends RequestHandler {
         User user = getService().getUserIfAuthenticated(email, password);
         if (user != null) {
             HttpSession session = request.getSession();
+            String name = user.getFirstName() + " " + user.getLastName();
+            session.setAttribute("userName", name);
+            session.setAttribute("userTeam", user.getTeam());
             session.setAttribute("email", email);
             session.setAttribute("firstName", user.getFirstName());
             return "index.jsp";

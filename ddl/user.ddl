@@ -38,6 +38,10 @@ GRANT ALL ON SCHEMA groep2b5 TO local_u0015529;
 GRANT ALL ON SEQUENCE groep2b5.user_id_seq TO local_u0015529;
 GRANT ALL ON TABLE groep2b5.users TO local_u0015529;
 
+GRANT ALL ON SCHEMA groep2b5 TO local_u0034562;
+GRANT ALL ON SEQUENCE groep2b5.user_id_seq TO local_u0034562;
+GRANT ALL ON TABLE groep2b5.users TO local_u0034562;
+
 -- grant aan teamgenoot
 GRANT ALL ON SCHEMA groep2b5 TO local_r0903727;
 GRANT ALL ON SEQUENCE groep2b5.user_id_seq TO local_r0903727;

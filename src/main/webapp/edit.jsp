@@ -38,10 +38,10 @@
             <p class="please">Please fill in all input fields.</p>
             <form method="post" action="Controller?command=Edit&userId=${requestScope.userToEdit.userid}" novalidate="novalidate">
                 <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName"
-                                                                 required value="${userToEdit.lastName}"> </p>
+                                                                 required value="${lastNameCorrect}"> </p>
                 <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName"
-                                                                   required value="${userToEdit.firstName}"> </p>
-                <p><label for="email">Email</label><input type="email" id="email" name="email" required value="${userToEdit.email}"></p>
+                                                                   required value="${firstNameCorrect}"> </p>
+                <p><label for="email">Email</label><input type="email" id="email" name="email" required value="${emailCorrect}"></p>
                 <label for="role">Role</label>
                 <select name="role" id="role">
                     <option value="employee">Employee</option>

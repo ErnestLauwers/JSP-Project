@@ -23,6 +23,7 @@ public class Edit extends RequestHandler {
         registerTeam(request, userE, errors);
         try {
             if (errors.isEmpty()) {
+                getService().update(userE);
                 return "index.jsp";
             }
             else {
@@ -39,7 +40,7 @@ public class Edit extends RequestHandler {
         String firstName = request.getParameter("firstName");
         try{
             user.setFirstName(firstName);
-            request.setAttribute("userToEditFirstName", firstName);
+            request.setAttribute("firstNameCorrect", firstName);
         }catch (Exception e){
             errors.add(e.getMessage());
         }
@@ -49,7 +50,7 @@ public class Edit extends RequestHandler {
         String lastName = request.getParameter("lastName");
         try{
             user.setLastName(lastName);
-            request.setAttribute("userToEditLastName", lastName);
+            request.setAttribute("lastNameCorrect", lastName);
         }catch (Exception e){
             errors.add(e.getMessage());
         }
@@ -59,7 +60,7 @@ public class Edit extends RequestHandler {
         String email = request.getParameter("email");
         try{
             user.setEmail(email);
-            request.setAttribute("userToEditEmail", email);
+            request.setAttribute("emailCorrect", email);
         }catch (Exception e){
             errors.add(e.getMessage());
         }

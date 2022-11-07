@@ -1,11 +1,15 @@
 package domain.service;
 
 import domain.model.User;
+import domain.model.WorkOrder;
+
 import java.util.ArrayList;
 
 public class AppService {
 
     private UserService users = new UserServiceDB();
+
+    private WorkOrderService workOrders = new WorkOrderServiceDB();
 
     public User getUser(int userid) {
         return users.getUser(userid);
@@ -35,4 +39,27 @@ public class AppService {
         return users.getUserIfAuthenticated(email, password);
     }
 
+    public WorkOrder getWorkOrder(int workOrderId) {
+        return workOrders.getWorkOrder(workOrderId);
+    }
+
+    public ArrayList<WorkOrder> getAllWorkOrders() {
+        return workOrders.getAllWorkOrders();
+    }
+
+    public void addWorkOrder(WorkOrder workOrder) {
+        workOrders.addWorkOrder(workOrder);
+    }
+
+    public void update(WorkOrder workOrder) {
+        workOrders.update(workOrder);
+    }
+
+    public void deleteWorkOrder(int workOrderId) {
+        workOrders.deleteWorkOrder(workOrderId);
+    }
+
+    public int getNumberOfWorkOrders() {
+        return workOrders.getNumberOfWorkOrders();
+    }
 }

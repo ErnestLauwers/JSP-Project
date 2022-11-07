@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" >
     <meta charset="UTF-8">
-    <title>Overview</title>
+    <title>Users</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -25,7 +25,7 @@
             <jsp:param name="hier" value="Overview"/>
         </jsp:include>
         <h2>
-            User Overview
+            Overview
         </h2>
         <hr class="solid">
     </header>

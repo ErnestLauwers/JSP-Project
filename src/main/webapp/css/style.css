@@ -191,7 +191,7 @@ h2 {
     list-style-type: none;
 }
 
-.wijzig img, .verwijder img {
+.wijzig img, .verwijder img, .wijzig2 img, .verwijder2 img {
     width: 1.5rem;
     height: 1.5rem;
 }
@@ -208,12 +208,24 @@ h2 {
     border: none;
 }
 
-.knopWijzig:hover, .knopVerwijder:hover {
+.knopWijzig2, .knopVerwijder2 {
+    border-radius: 60px;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.knopWijzig:hover, .knopVerwijder:hover, .knopWijzig2:hover, .knopVerwijder2:hover {
     background-color: #414040;
     border-radius: 50px;
 }
 
-.verwijder {
+.wijzig2, .verwijder2 {
+    margin-top: 0.5rem;
+    width: 2.5rem;
+    display: inline-block;
+}
+
+.verwijder, .wijzig2, .verwijder2 {
     padding-left: 0.4rem;
     padding-right: 0.5rem;
 }
@@ -288,6 +300,23 @@ input[type="submit"] {
     color: #b94a48;
     border-color: #b94a48;
     box-shadow: inset 0px 1px 4px #d59392;
+}
+
+.grid-container {
+    display: grid;
+    width: 90%;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    grid-gap: 20px;
+}
+
+.grid-item {
+    border: dotted #232020;
+    background-color: #171515;
+    padding: 1rem 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+    width: 50%;
 }
 
 /* mobile first */

@@ -95,13 +95,15 @@ public class UserServiceDB implements UserService {
     public void update(User user) {
         String query = String.format("update %s.users set email = (?), password = (?), firstname = (?), lastname = (?), team = (?), role = (?) WHERE userid = (?)", schema);
         try {
+            String teamName = user.getTeam().getStringValue().toUpperCase(Locale.ROOT);
+            String roleName = user.getRole().getStringValue().toUpperCase(Locale.ROOT);
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getFirstName());
             preparedStatement.setString(4, user.getLastName());
-            preparedStatement.setString(5, user.getTeam().getStringValue());
-            preparedStatement.setString(6, user.getRole().getStringValue());
+            preparedStatement.setString(5, teamName);
+            preparedStatement.setString(6, roleName);
             preparedStatement.setInt(7, user.getUserid());
             preparedStatement.execute();
         } catch (SQLException e) {
@@ -125,13 +127,15 @@ public class UserServiceDB implements UserService {
     public void addUser(User user) {
         String query = String.format("insert into %s.users (email, password, firstName, lastName, team, role) values (?, ?, ?, ?, ?, ?)", schema);
         try {
+            String teamName = user.getTeam().getStringValue().toUpperCase(Locale.ROOT);
+            String roleName = user.getRole().getStringValue().toUpperCase(Locale.ROOT);
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getFirstName());
             preparedStatement.setString(4, user.getLastName());
-            preparedStatement.setString(5, user.getTeam().getStringValue());
-            preparedStatement.setString(6, user.getRole().getStringValue());
+            preparedStatement.setString(5, teamName);
+            preparedStatement.setString(6, roleName);
             preparedStatement.execute();
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
