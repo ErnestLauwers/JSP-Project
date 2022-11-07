@@ -25,6 +25,17 @@ public class WorkOrdersPage extends Page{
         return found;
     }
 
+    public boolean containsDescription(String description) {
+        ArrayList<WebElement> listItems=(ArrayList<WebElement>) this.driver.findElements(By.cssSelector("p"));
+        boolean found=false;
+        for (WebElement listItem:listItems) {
+            if (listItem.getText().contains(description)) {
+                found=true;
+            }
+        }
+        return found;
+    }
+
     @FindBy(id = "knopVerwijder")
     private WebElement deleteButton;
 

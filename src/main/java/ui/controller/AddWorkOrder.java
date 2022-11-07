@@ -100,8 +100,13 @@ public class AddWorkOrder extends RequestHandler {
             if (workOrder.getUserId() == id) {
                 for (WorkOrder order : workOrders) {
                     if (workOrder.getUserId() == id) {
-                        throw new DomainException("A user cannot perform two jobs at the same time");
-
+                        if (order.getDate() == date4) {
+                            throw new DomainException("A user cannot perform two jobs at the same time");
+                            /*if (startTime2.isAfter(order.getStartTime()) && startTime2.isBefore(order.getEndTime()) ||
+                                    endTime2.isAfter(order.getStartTime()) && endTime2.isBefore(order.getEndTime())) {
+                                throw new DomainException("A user cannot perform two jobs at the same time");
+                            }*/
+                        }
                     }
                 }
             }
