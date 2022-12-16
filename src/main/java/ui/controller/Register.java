@@ -2,7 +2,10 @@ package ui.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import domain.model.Role;
+import domain.model.Team;
 import domain.model.User;
 
 import java.util.ArrayList;
@@ -28,16 +31,35 @@ public class Register extends RequestHandler {
             }catch (Exception e){
                 errors.add(e.getMessage());
                 request.setAttribute("errors", errors);
+                HttpSession session = request.getSession();
+                User user2 = (User) session.getAttribute("user");
+                request.setAttribute("userLoggedIn", user2);
+                Role role = (Role) session.getAttribute("userRole");
+                request.setAttribute("roleLoggedIn", role);
                 return "register.jsp";
             }
             request.setAttribute("errors", errors);
             request.setAttribute("users", getService().getAllUsers());
+            HttpSession session = request.getSession();
+            User user2 = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user2);
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
+            int id = (int) session.getAttribute("userId");
+            request.setAttribute("idLoggedIn", id);
+            Team team = (Team) session.getAttribute("userTeam");
+            request.setAttribute("teamLoggedIn", team);
             return "userOverview.jsp";
         }else{
             if (errors.get(0).length() > 20) {
                 errors.remove(0);
             }
             request.setAttribute("errors", errors);
+            HttpSession session = request.getSession();
+            User user2 = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user2);
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
             return "register.jsp";
         }
     }

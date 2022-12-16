@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+
+<c:if test="${roleLoggedIn.getStringValue() == 'director'}">
 <div id="container">
     <header>
         <h1>
@@ -27,12 +29,12 @@
     <main>
         <h3>Are you sure you want to delete this Work Order?</h3>
         <div class="inhoudVerwijder">
-            <p>${requestScope.workOrderToDelete.date} st: ${requestScope.workOrderToDelete.startTime} et: ${requestScope.workOrderToDelete.endTime}</p>
-            <p>Id: #${requestScope.workOrderToDelete.workOrderId}</p>
+            <p><c:out value="${requestScope.workOrderToDelete.date}"/> st: <c:out value="${requestScope.workOrderToDelete.startTime}"/> et: <c:out value="${requestScope.workOrderToDelete.endTime}"/></p>
+            <p>Id: #<c:out value="${requestScope.workOrderToDelete.workOrderId}"/></p>
 
         </div>
         <div class="invulFormulierVerwijder">
-            <form action="Controller?command=DeleteWorkOrder&workOrderId=${requestScope.workOrderToDelete.workOrderId}" method="post" novalidate>
+            <form action="Controller?command=DeleteWorkOrder&workOrderId=<c:out value="${requestScope.workOrderToDelete.workOrderId}"/>" method="post" novalidate>
                 <div class="invulVeldGroen">
                     <input type="submit" name="Groen" value="Yes" id="submitYes">
                 </div>
@@ -48,5 +50,13 @@
         <p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p>
     </footer>
 </div>
+</c:if>
+<c:if test="${userLoggedIn == null || roleLoggedIn.getStringValue() == 'employee' || roleLoggedIn.getStringValue() == 'teamleader'}">
+    <div class="alert-danger">
+        <ul>
+            <li>You Do Not Have Access to This Page!</li>
+        </ul>
+    </div>
+</c:if>
 </body>
 </html>

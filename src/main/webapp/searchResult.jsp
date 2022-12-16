@@ -12,12 +12,7 @@
 </head>
 <body>
 
-    <%
-    if (session.getAttribute("email") == null) {
-        response.sendRedirect("login.jsp");
-    }
-%>
-
+<c:if test="${roleLoggedIn.getStringValue() == 'director'}">
 <div id="container">
     <header>
         <h1>
@@ -32,7 +27,7 @@
     <main>
         <c:choose>
             <c:when test="${found == true}">
-                <p>We hebben het volgend project gevonden</p>
+                <p>We found the following projects</p>
                 <br>
                 <br>
                 <table>
@@ -61,5 +56,14 @@
         <p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p>
     </footer>
 </div>
+</c:if>
+<c:if test="${userLoggedIn == null || roleLoggedIn.getStringValue() == 'employee' || roleLoggedIn.getStringValue() == 'teamleader'}">
+    <div class="alert-danger">
+        <ul>
+            <li>You Do Not Have Access to This Page!</li>
+        </ul>
+    </div>
+</c:if>
+
 </body>
 </html>

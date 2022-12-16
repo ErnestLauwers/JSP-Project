@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+
+<c:if test="${roleLoggedIn.getStringValue() == 'teamleader' || roleLoggedIn.getStringValue() == 'director' || roleLoggedIn.getStringValue() == 'employee'}">
 <div id="container">
     <header>
         <h1>
@@ -29,24 +31,24 @@
             <c:forEach var="error" items="${errors}">
                 <div class="alert-danger">
                     <ul>
-                        <li>${error}</li>
+                        <li><c:out value="${error}"/></li>
                     </ul>
                 </div>
             </c:forEach>
         </c:if>
         <div class="invulFormulier">
-            <form method="post" action="Controller?command=EditWorkOrder&workOrderId=${requestScope.workOrderToEdit.workOrderId}" novalidate="novalidate">
+            <form method="post" action="Controller?command=EditWorkOrder&workOrderId=<c:out value="${requestScope.workOrderToEdit.workOrderId}"/>" novalidate="novalidate">
                 <p>
                     <label for="startTime">Start Time</label>
-                    <input type="time" id="startTime" name="startTime" required value="${startTimeCorrect}">
+                    <input type="time" id="startTime" name="startTime" required value="<c:out value="${startTimeCorrect}"/>">
                 </p>
                 <p>
                     <label for="endTime">End Time</label>
-                    <input type="time" id="endTime" name="endTime" required value="${endTimeCorrect}">
+                    <input type="time" id="endTime" name="endTime" required value="<c:out value="${endTimeCorrect}"/>">
                 </p>
                 <p>
                     <label for="description">Description</label>
-                    <input type="text" id="description" name="description" required value="${descriptionCorrect}">
+                    <input type="text" id="description" name="description" required value="<c:out value="${descriptionCorrect}"/>">
                 </p>
                 <p><input type="submit" id="signUp" value="Edit Work Order"></p>
             </form>
@@ -56,5 +58,13 @@
         <p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p>
     </footer>
 </div>
+</c:if>
+<c:if test="${userLoggedIn == null}">
+    <div class="alert-danger">
+        <ul>
+            <li>You Do Not Have Access to This Page!</li>
+        </ul>
+    </div>
+</c:if>
 </body>
 </html>

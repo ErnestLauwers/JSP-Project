@@ -16,4 +16,8 @@ public interface ProjectService {
 
     public void update(Project project);
 
+    public ArrayList<Project> sortAllProjectsDescending();
+
+    public ArrayList<Project> sortAllProjectsAscending();
+
 }

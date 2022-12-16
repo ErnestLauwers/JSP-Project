@@ -1,8 +1,6 @@
 package ui.controller;
 
-import domain.model.DomainException;
-import domain.model.Team;
-import domain.model.WorkOrder;
+import domain.model.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +38,15 @@ public class AddWorkOrder extends RequestHandler {
             }
             request.setAttribute("errors", errors);
             request.setAttribute("workOrders", getService().getAllWorkOrders());
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user);
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
+            int id = (int) session.getAttribute("userId");
+            request.setAttribute("idLoggedIn", id);
+            Team team = (Team) session.getAttribute("userTeam");
+            request.setAttribute("teamLoggedIn", team);
             return "workOrders.jsp";
         }else{
             request.setAttribute("errors", errors);

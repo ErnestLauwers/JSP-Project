@@ -25,7 +25,7 @@
     <main>
         <div>
             <c:if test="${error != null}">
-                <p class="alert-danger-login">${error}</p>
+                <p class="alert-danger-login"><c:out value="${error}"/></p>
             </c:if>
             <form method="post" action="Controller?command=Login">
                 <div>

@@ -1,7 +1,9 @@
 package ui.controller;
 
 import domain.model.Project;
+import domain.model.Role;
 import domain.model.Team;
+import domain.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +30,11 @@ public class AddProject extends RequestHandler {
         if (errors.size() == 0) {
             getService().addProject(project);
             request.setAttribute("projects", getService().getAllProjects());
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user);
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
             return "projects.jsp";
         } else {
             request.setAttribute("errors", errors);

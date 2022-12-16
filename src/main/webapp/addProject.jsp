@@ -11,11 +11,7 @@
 </head>
 <body>
 
-    <%
-    if (session.getAttribute("email") == null) {
-        response.sendRedirect("login.jsp");
-    }
-%>
+<c:if test="${roleLoggedIn.getStringValue() == 'teamleader' || roleLoggedIn.getStringValue() == 'director'}">
     <div id="container">
         <header>
             <h1>
@@ -59,5 +55,13 @@
             <p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p>
         </footer>
     </div>
+</c:if>
+<c:if test="${userLoggedIn == null || roleLoggedIn.getStringValue() == 'employee'}">
+    <div class="alert-danger">
+        <ul>
+            <li>You Do Not Have Access to This Page!</li>
+        </ul>
+    </div>
+</c:if>
 </body>
 </html>

@@ -2,7 +2,9 @@ package ui.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import domain.model.Role;
 import domain.model.User;
 
 import java.util.ArrayList;
@@ -24,6 +26,11 @@ public class Edit extends RequestHandler {
         try {
             if (errors.isEmpty()) {
                 getService().update(userE);
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                request.setAttribute("userLoggedIn", user);
+                Role role = (Role) session.getAttribute("userRole");
+                request.setAttribute("roleLoggedIn", role);
                 return "index.jsp";
             }
             else {
@@ -32,6 +39,11 @@ public class Edit extends RequestHandler {
             }
         } catch (IllegalArgumentException e) {
             request.setAttribute("errors", errors);
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user);
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
             return "index.jsp)";
         }
     }

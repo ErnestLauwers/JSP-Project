@@ -11,12 +11,7 @@
 </head>
 <body>
 
-    <%
-    if (session.getAttribute("email") == null) {
-        response.sendRedirect("login.jsp");
-    }
-%>
-
+<c:if test="${roleLoggedIn.getStringValue() == 'teamleader' || roleLoggedIn.getStringValue() == 'director' || roleLoggedIn.getStringValue() == 'employee'}">
 <div id="container">
     <header>
         <h1>
@@ -29,6 +24,9 @@
         <hr class="solid">
     </header>
     <main>
+        <p class="descasc">Sort By Start Time:</p>
+        <div class="sortBox"><a href="Controller?command=SortProjectsAsc" class="asc" id="ascLink">Closest</a>
+            <a href="Controller?command=SortProjectsDesc" class="desc" id="descLink">Furthest</a></div>
         <table>
             <tr>
                 <th>Project Id</th>
@@ -36,19 +34,25 @@
                 <th>Team</th>
                 <th>Start</th>
                 <th>End</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <c:if test="${roleLoggedIn.getStringValue() == 'director'}">
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </c:if>
             </tr>
             <c:forEach var="project" items="${requestScope.projects}">
+                <c:if test="${teamLoggedIn == project.team || roleLoggedIn.getStringValue() == 'teamleader' || roleLoggedIn.getStringValue() == 'director'}">
                 <tr>
                     <td>${project.projectId}</td>
                     <td>${project.name}</td>
                     <td>${project.team}</td>
                     <td>${project.startDate}</td>
                     <td>${project.endDate}</td>
-                    <td class="wijzig"><div class="knopWijzig"><a class="edit" href="Controller?command=EditProjectPage&projectid=${project.projectId}" id="knopWijzig"><img src="images/wijzig.png" alt="wijzig"></a></div></td>
-                    <td class="verwijder"><div class="knopVerwijder"><a class="delete" href="Controller?command=DeleteProjectConfirmation&projectId=${project.projectId}" id="knopVerwijder"><img src="images/verwijder.png" alt="verwijder"></a></div></td>
+                    <c:if test="${roleLoggedIn.getStringValue() == 'director'}">
+                        <td class="wijzig"><div class="knopWijzig"><a class="edit" href="Controller?command=EditProjectPage&projectid=${project.projectId}" id="knopWijzig"><img src="images/wijzig.png" alt="wijzig"></a></div></td>
+                        <td class="verwijder"><div class="knopVerwijder"><a class="delete" href="Controller?command=DeleteProjectConfirmation&projectId=${project.projectId}" id="knopVerwijder"><img src="images/verwijder.png" alt="verwijder"></a></div></td>
+                    </c:if>
                 </tr>
+                </c:if>
             </c:forEach>
         </table>
     </main>
@@ -56,5 +60,13 @@
         <p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p>
     </footer>
 </div>
+</c:if>
+<c:if test="${userLoggedIn == null}">
+    <div class="alert-danger">
+        <ul>
+            <li>You Do Not Have Access to This Page!</li>
+        </ul>
+    </div>
+</c:if>
 </body>
 </html>

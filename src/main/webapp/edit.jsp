@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+
+<c:if test="${roleLoggedIn.getStringValue() == 'teamleader' || roleLoggedIn.getStringValue() == 'director' || roleLoggedIn.getStringValue() == 'employee'}">
 <div id="container">
     <header>
         <h1>
@@ -42,12 +44,17 @@
                 <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName"
                                                                    required value="${firstNameCorrect}"> </p>
                 <p><label for="email">Email</label><input type="email" id="email" name="email" required value="${emailCorrect}"></p>
+                <c:if test="${roleLoggedIn.getStringValue() == 'teamleader' && idLoggedIn != userToEditId || roleLoggedIn.getStringValue() == 'director' && idLoggedIn != userToEditId}">
                 <label for="role">Role</label>
                 <select name="role" id="role">
                     <option value="employee">Employee</option>
                     <option value="teamLeader">Team Leader</option>
-                    <option value="director">Director</option>
+                    <c:if test="${roleLoggedIn.getStringValue() == 'director'}">
+                        <option value="director">Director</option>
+                    </c:if>
                 </select>
+                </c:if>
+                <c:if test="${roleLoggedIn.getStringValue() == 'employee' || roleLoggedIn.getStringValue() == 'director'}">
                 <label for="team">Team</label>
                 <select name="team" id="team">
                     <option value="alpha">Alpha</option>
@@ -56,6 +63,7 @@
                     <option value="delta">Delta</option>
                     <option value="epsilon">Epsilon</option>
                 </select>
+                </c:if>
                 <p><input type="submit" id="edit" value="Edit user"></p>
             </form>
         </div>
@@ -64,5 +72,13 @@
         <p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p>
     </footer>
 </div>
+</c:if>
+<c:if test="${userLoggedIn == null}">
+    <div class="alert-danger">
+        <ul>
+            <li>You Do Not Have Access to This Page!</li>
+        </ul>
+    </div>
+</c:if>
 </body>
 </html>

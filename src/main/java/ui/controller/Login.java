@@ -1,5 +1,6 @@
 package ui.controller;
 
+import domain.model.Role;
 import domain.model.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,12 @@ public class Login extends RequestHandler {
             session.setAttribute("email", email);
             session.setAttribute("firstName", user.getFirstName());
             session.setAttribute("userId", user.getUserid());
+            session.setAttribute("userRole", user.getRole());
+            session.setAttribute("user", user);
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
+            User user2 = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user2);
             return "index.jsp";
         } else {
             String error = "No valid email/password";

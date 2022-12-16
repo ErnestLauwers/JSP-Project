@@ -92,4 +92,8 @@ public class AppService {
     public void update(Project project) {
         projects.update(project);
     }
+
+    public ArrayList<Project> sortAllProjectsDescending() {return projects.sortAllProjectsDescending();}
+
+    public ArrayList<Project> sortAllProjectsAscending() {return projects.sortAllProjectsAscending();}
 }

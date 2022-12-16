@@ -142,6 +142,86 @@ public class ProjectServiceDB implements ProjectService {
         return projects;
     }
 
+    @Override
+    public ArrayList<Project> sortAllProjectsDescending() {
+        ArrayList<Project> sortedProjects = new ArrayList<>();
+        String query = String.format("select * from %s.projects order by startdate desc, enddate desc", schema);
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(query);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int projectId = result.getInt("projectid");
+                String name = result.getString("name");
+                String teamname = result.getString("team");
+                Timestamp startDate = result.getTimestamp("startdate");
+                Timestamp endDate = result.getTimestamp("enddate");
+
+                String dateCorStart = startDate.toString();
+                String years = dateCorStart.substring(0, 4);
+                String months = dateCorStart.substring(5, 7);
+                String days = dateCorStart.substring(8, 10);
+                String date3 = days + "/" + months + "/" + years;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate date4 = LocalDate.parse(date3, formatter);
+
+                String dateCorEnd = endDate.toString();
+                String years2 = dateCorEnd.substring(0, 4);
+                String months2 = dateCorEnd.substring(5, 7);
+                String days2 = dateCorEnd.substring(8, 10);
+                String date5 = days2 + "/" + months2 + "/" + years2;
+                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate date6 = LocalDate.parse(date5, formatter2);
+                Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
+
+                Project project = new Project(projectId, name, team, date4, date6);
+                sortedProjects.add(project);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        return sortedProjects;
+    }
+
+    @Override
+    public ArrayList<Project> sortAllProjectsAscending() {
+        ArrayList<Project> sortedProjects = new ArrayList<>();
+        String query = String.format("select * from %s.projects order by startdate asc, enddate asc", schema);
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(query);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int projectId = result.getInt("projectid");
+                String name = result.getString("name");
+                String teamname = result.getString("team");
+                Timestamp startDate = result.getTimestamp("startdate");
+                Timestamp endDate = result.getTimestamp("enddate");
+
+                String dateCorStart = startDate.toString();
+                String years = dateCorStart.substring(0, 4);
+                String months = dateCorStart.substring(5, 7);
+                String days = dateCorStart.substring(8, 10);
+                String date3 = days + "/" + months + "/" + years;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate date4 = LocalDate.parse(date3, formatter);
+
+                String dateCorEnd = endDate.toString();
+                String years2 = dateCorEnd.substring(0, 4);
+                String months2 = dateCorEnd.substring(5, 7);
+                String days2 = dateCorEnd.substring(8, 10);
+                String date5 = days2 + "/" + months2 + "/" + years2;
+                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate date6 = LocalDate.parse(date5, formatter2);
+                Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
+
+                Project project = new Project(projectId, name, team, date4, date6);
+                sortedProjects.add(project);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        return sortedProjects;
+    }
+
     private void checkConnection() {
         try {
             if (this.connection == null || this.connection.isClosed()) {

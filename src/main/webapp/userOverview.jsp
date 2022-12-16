@@ -9,13 +9,6 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-
-<%
-    if (session.getAttribute("email") == null) {
-        response.sendRedirect("login.jsp");
-    }
-%>
-
 <div id="container">
     <header>
         <h1>
@@ -38,8 +31,12 @@
                 <th>E-mail</th>
                 <th>Team</th>
                 <th>Role</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <c:if test="${userLoggedIn != null}">
+                    <th>Edit</th>
+                </c:if>
+                <c:if test="${roleLoggedIn.getStringValue() == 'director'}">
+                    <th>Delete</th>
+                </c:if>
             </tr>
             <c:forEach var="user" items="${requestScope.users}">
                 <tr>
@@ -49,8 +46,12 @@
                     <td>${user.email}</td>
                     <td>${user.team}</td>
                     <td>${user.role}</td>
-                    <td class="wijzig"><div class="knopWijzig"><a class="edit" href="Controller?command=StartEdit&id=${user.userid}" id="knopWijzig"><img src="images/wijzig.png" alt="wijzig"></a></div></td>
-                    <td class="verwijder"><div class="knopVerwijder"><a class="delete" href="Controller?command=DeleteConfirmation&id=${user.userid}" id="knopVerwijder"><img src="images/verwijder.png" alt="verwijder"></a></div></td>
+                    <c:if test="${userLoggedIn != null && roleLoggedIn.getStringValue() == 'employee' && idLoggedIn == user.userid || roleLoggedIn.getStringValue() == 'teamleader' && teamLoggedIn == user.team || roleLoggedIn.getStringValue() == 'director'}">
+                        <td class="wijzig"><div class="knopWijzig"><a class="edit" href="Controller?command=StartEdit&id=${user.userid}" id="knopWijzig"><img src="images/wijzig.png" alt="wijzig"></a></div></td>
+                    </c:if>
+                    <c:if test="${roleLoggedIn.getStringValue() == 'director'}">
+                        <td class="verwijder"><div class="knopVerwijder"><a class="delete" href="Controller?command=DeleteConfirmation&id=${user.userid}" id="knopVerwijder"><img src="images/verwijder.png" alt="verwijder"></a></div></td>
+                    </c:if>
                 </tr>
             </c:forEach>
             </tbody>

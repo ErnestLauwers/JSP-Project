@@ -1,28 +1,28 @@
 package ui.controller;
 
 import domain.model.Role;
+import domain.model.Team;
 import domain.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class EditProjectPage extends RequestHandler {
+public class SortProjectsDesc extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        String projectId = request.getParameter("projectid");
-        int id = Integer.parseInt(projectId);
-        request.setAttribute("correctName", service.getProject(id).getName());
-        request.setAttribute("correctStartDate", service.getProject(id).getStartDate());
-        request.setAttribute("correctEndDate", service.getProject(id).getEndDate());
-        request.setAttribute("projectToEdit", service.getProject(id));
+        request.setAttribute("projects", service.sortAllProjectsDescending());
         HttpSession session = request.getSession();
         Role role = (Role) session.getAttribute("userRole");
         request.setAttribute("roleLoggedIn", role);
         User user = (User) session.getAttribute("user");
         request.setAttribute("userLoggedIn", user);
-        return "editProject.jsp";
+        int id = (int) session.getAttribute("userId");
+        request.setAttribute("idLoggedIn", id);
+        Team team = (Team) session.getAttribute("userTeam");
+        request.setAttribute("teamLoggedIn", team);
+        return "projects.jsp";
     }
 
 }

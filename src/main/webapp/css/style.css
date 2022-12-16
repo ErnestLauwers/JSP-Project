@@ -64,6 +64,7 @@ nav ul li {
     padding-top: 2rem;
     padding-bottom: 2rem;
     padding-left: 1rem;
+    padding-right: 0.5rem;
 }
 
 nav ul li a{
@@ -244,6 +245,7 @@ th, td {
     text-decoration: none;
     font-size: 0.9rem;
     color: #ECECEC;
+    padding-bottom: 0.5rem;
 }
 
 .alert-danger {
