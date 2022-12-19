@@ -136,6 +136,11 @@ public class UserServiceDB implements UserService {
             preparedStatement.setString(4, user.getLastName());
             preparedStatement.setString(5, teamName);
             preparedStatement.setString(6, roleName);
+            for (User user2 : getAllUsers()) {
+                if (user2.getEmail().equals(user.getEmail())) {
+                    throw new IllegalArgumentException("This email is already in use");
+                }
+            }
             preparedStatement.execute();
         } catch (SQLException e) {
             throw new DbException(e.getMessage());

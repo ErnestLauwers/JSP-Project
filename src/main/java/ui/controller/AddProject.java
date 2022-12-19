@@ -37,6 +37,11 @@ public class AddProject extends RequestHandler {
             request.setAttribute("roleLoggedIn", role);
             return "projects.jsp";
         } else {
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user);
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
             request.setAttribute("errors", errors);
             return "addProject.jsp";
         }
@@ -70,6 +75,9 @@ public class AddProject extends RequestHandler {
 
     private void registerStartDate(HttpServletRequest request, Project project, ArrayList<String> errors) {
         String startdate = request.getParameter("startDate");
+        if (startdate.equals("")) {
+            throw new IllegalArgumentException("Startdate cannot be empty!");
+        }
         LocalDate startdateLocalDate = LocalDate.parse(startdate);
         request.setAttribute("correctStartDate", LocalDate.now());
         try {
@@ -87,10 +95,10 @@ public class AddProject extends RequestHandler {
         if (!enddate.isEmpty()) {
             LocalDate enddateLocaleDate = LocalDate.parse(enddate);
             try {
+                request.setAttribute("correctEndDate", enddateLocaleDate);
                 if (enddateLocaleDate.isBefore(LocalDate.now())) throw new IllegalArgumentException("Enddate can't be in the past!");
                 if (enddateLocaleDate.isBefore(startdateLocaleDate)) throw new IllegalArgumentException("Enddate can't be before startdate!");
                 project.setEndDate(enddateLocaleDate);
-                request.setAttribute("correctEndDate", enddateLocaleDate);
             } catch (Exception e) {
                 errors.add(e.getMessage());
             }

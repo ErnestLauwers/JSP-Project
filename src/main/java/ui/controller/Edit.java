@@ -34,6 +34,12 @@ public class Edit extends RequestHandler {
                 return "index.jsp";
             }
             else {
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                request.setAttribute("userLoggedIn", user);
+                Role role = (Role) session.getAttribute("userRole");
+                request.setAttribute("roleLoggedIn", role);
+                request.setAttribute("errors", errors);
                 request.setAttribute("errors", errors);
                 return "edit.jsp";
             }

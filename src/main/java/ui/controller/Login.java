@@ -6,12 +6,13 @@ import domain.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Locale;
 
 public class Login extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        String email = request.getParameter("email");
+        String email = request.getParameter("email").toLowerCase(Locale.ROOT);
         String password = request.getParameter("password");
 
         User user = getService().getUserIfAuthenticated(email, password);

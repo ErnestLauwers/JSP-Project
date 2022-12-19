@@ -1,10 +1,13 @@
 package ui.controller;
 
 import domain.model.DomainException;
+import domain.model.Role;
+import domain.model.User;
 import domain.model.WorkOrder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -24,15 +27,30 @@ public class EditWorkOrder extends RequestHandler {
         registerDescription(request, workOrderE, errors);
         try {
             if (errors.isEmpty()) {
+                HttpSession session = request.getSession();
+                User user2 = (User) session.getAttribute("user");
+                request.setAttribute("userLoggedIn", user2);
+                Role role = (Role) session.getAttribute("userRole");
+                request.setAttribute("roleLoggedIn", role);
                 getService().update(workOrderE);
                 return "index.jsp";
             }
             else {
+                HttpSession session = request.getSession();
+                User user2 = (User) session.getAttribute("user");
+                request.setAttribute("userLoggedIn", user2);
+                Role role = (Role) session.getAttribute("userRole");
+                request.setAttribute("roleLoggedIn", role);
                 request.setAttribute("errors", errors);
                 return "editWorkOrder.jsp";
             }
         } catch (IllegalArgumentException e) {
             getService().update(workOrderE);
+            HttpSession session = request.getSession();
+            User user2 = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user2);
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
             request.setAttribute("errors", errors);
             return "index.jsp";
         }

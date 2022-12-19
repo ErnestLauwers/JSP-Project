@@ -163,18 +163,22 @@ public class ProjectServiceDB implements ProjectService {
                 String date3 = days + "/" + months + "/" + years;
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate date4 = LocalDate.parse(date3, formatter);
-
-                String dateCorEnd = endDate.toString();
-                String years2 = dateCorEnd.substring(0, 4);
-                String months2 = dateCorEnd.substring(5, 7);
-                String days2 = dateCorEnd.substring(8, 10);
-                String date5 = days2 + "/" + months2 + "/" + years2;
-                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate date6 = LocalDate.parse(date5, formatter2);
-                Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
-
-                Project project = new Project(projectId, name, team, date4, date6);
-                sortedProjects.add(project);
+                if (endDate != null) {
+                    String dateCorEnd = endDate.toString();
+                    String years2 = dateCorEnd.substring(0, 4);
+                    String months2 = dateCorEnd.substring(5, 7);
+                    String days2 = dateCorEnd.substring(8, 10);
+                    String date5 = days2 + "/" + months2 + "/" + years2;
+                    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate date6 = LocalDate.parse(date5, formatter2);
+                    Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
+                    Project project = new Project(projectId, name, team, date4, date6);
+                    sortedProjects.add(project);
+                } else {
+                    Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
+                    Project project = new Project(projectId, name, team, date4);
+                    sortedProjects.add(project);
+                }
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -204,17 +208,22 @@ public class ProjectServiceDB implements ProjectService {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate date4 = LocalDate.parse(date3, formatter);
 
-                String dateCorEnd = endDate.toString();
-                String years2 = dateCorEnd.substring(0, 4);
-                String months2 = dateCorEnd.substring(5, 7);
-                String days2 = dateCorEnd.substring(8, 10);
-                String date5 = days2 + "/" + months2 + "/" + years2;
-                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate date6 = LocalDate.parse(date5, formatter2);
-                Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
-
-                Project project = new Project(projectId, name, team, date4, date6);
-                sortedProjects.add(project);
+                if (endDate != null) {
+                    String dateCorEnd = endDate.toString();
+                    String years2 = dateCorEnd.substring(0, 4);
+                    String months2 = dateCorEnd.substring(5, 7);
+                    String days2 = dateCorEnd.substring(8, 10);
+                    String date5 = days2 + "/" + months2 + "/" + years2;
+                    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate date6 = LocalDate.parse(date5, formatter2);
+                    Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
+                    Project project = new Project(projectId, name, team, date4, date6);
+                    sortedProjects.add(project);
+                } else {
+                    Team team = Team.valueOf(teamname.toUpperCase(Locale.ROOT));
+                    Project project = new Project(projectId, name, team, date4);
+                    sortedProjects.add(project);
+                }
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());

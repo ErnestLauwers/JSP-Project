@@ -13,7 +13,7 @@ CREATE TABLE groep2b5.projects
 
 GRANT ALL ON TABLE groep2b5.projects TO local_r0848777;
 
-INSERT INTO groep2b5.projects ("name", "team", "startdate", "enddate") values ('First', 'Alpha', '13/01/2023', '21/01/2024');
+INSERT INTO groep2b5.projects ("name", "team", "startdate", "enddate") values ('First', 'Alpha', '13/03/2023', '21/03/2024');
 INSERT INTO groep2b5.projects ("name", "team", "startdate", "enddate") values ('Second', 'Beta', '15/03/2023', '18/05/2024');
 INSERT INTO groep2b5.projects ("name", "team", "startdate", "enddate") values ('Third', 'Gamma', '17/09/2023', '17/10/2023');
 

@@ -41,14 +41,16 @@ public class Register extends RequestHandler {
             request.setAttribute("errors", errors);
             request.setAttribute("users", getService().getAllUsers());
             HttpSession session = request.getSession();
-            User user2 = (User) session.getAttribute("user");
-            request.setAttribute("userLoggedIn", user2);
-            Role role = (Role) session.getAttribute("userRole");
-            request.setAttribute("roleLoggedIn", role);
-            int id = (int) session.getAttribute("userId");
-            request.setAttribute("idLoggedIn", id);
-            Team team = (Team) session.getAttribute("userTeam");
-            request.setAttribute("teamLoggedIn", team);
+            if (session.getAttribute("email") != null) {
+                User user2 = (User) session.getAttribute("user");
+                request.setAttribute("userLoggedIn", user2);
+                Role role = (Role) session.getAttribute("userRole");
+                request.setAttribute("roleLoggedIn", role);
+                int id = (int) session.getAttribute("userId");
+                request.setAttribute("idLoggedIn", id);
+                Team team = (Team) session.getAttribute("userTeam");
+                request.setAttribute("teamLoggedIn", team);
+            }
             return "userOverview.jsp";
         }else{
             if (errors.get(0).length() > 20) {

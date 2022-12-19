@@ -33,6 +33,15 @@ public class AddWorkOrder extends RequestHandler {
                 getService().addWorkOrder(workOrder);
             }catch (Exception e){
                 errors.add(e.getMessage());
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                request.setAttribute("userLoggedIn", user);
+                Role role = (Role) session.getAttribute("userRole");
+                request.setAttribute("roleLoggedIn", role);
+                int id = (int) session.getAttribute("userId");
+                request.setAttribute("idLoggedIn", id);
+                Team team = (Team) session.getAttribute("userTeam");
+                request.setAttribute("teamLoggedIn", team);
                 request.setAttribute("errors", errors);
                 return "addWorkOrder.jsp";
             }
@@ -49,6 +58,15 @@ public class AddWorkOrder extends RequestHandler {
             request.setAttribute("teamLoggedIn", team);
             return "workOrders.jsp";
         }else{
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user);
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
+            int id = (int) session.getAttribute("userId");
+            request.setAttribute("idLoggedIn", id);
+            Team team = (Team) session.getAttribute("userTeam");
+            request.setAttribute("teamLoggedIn", team);
             request.setAttribute("errors", errors);
             return "addWorkOrder.jsp";
         }
