@@ -13,16 +13,18 @@ public class DeleteProject extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         String projectid = request.getParameter("projectid");
-        int id = Integer.parseInt(projectid);
-        service.deleteProject(id);
-        request.setAttribute("projects", getService().getAllProjects());
-        HttpSession session = request.getSession();
-        Team team = (Team) session.getAttribute("userTeam");
-        request.setAttribute("teamLoggedIn", team);
-        Role role = (Role) session.getAttribute("userRole");
-        request.setAttribute("roleLoggedIn", role);
-        User user = (User) session.getAttribute("user");
-        request.setAttribute("userLoggedIn", user);
+        if (projectid != null) {
+            int id = Integer.parseInt(projectid);
+            service.deleteProject(id);
+            request.setAttribute("projects", getService().getAllProjects());
+            HttpSession session = request.getSession();
+            Team team = (Team) session.getAttribute("userTeam");
+            request.setAttribute("teamLoggedIn", team);
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
+            User user = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user);
+        }
         return "projects.jsp";
     }
 

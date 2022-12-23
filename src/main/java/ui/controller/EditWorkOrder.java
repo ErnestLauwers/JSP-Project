@@ -19,6 +19,9 @@ public class EditWorkOrder extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<String>();
         String workOrderId = request.getParameter("workOrderId");
+        if (workOrderId == null) {
+            return "editWorkOrder.jsp";
+        }
         int id = Integer.parseInt(workOrderId);
         request.setAttribute("workOrderToEdit", service.getWorkOrder(id));
         WorkOrder workOrderE = service.getWorkOrder(id);
@@ -62,6 +65,7 @@ public class EditWorkOrder extends RequestHandler {
         String workOrderId = request.getParameter("workOrderId");
         int id = Integer.parseInt(workOrderId);
         LocalDate date4 = service.getWorkOrder(id).getDate();
+        System.out.println(date4);
         try{
             DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime startTime2 = LocalTime.parse(startTime, formatter3);
@@ -71,6 +75,8 @@ public class EditWorkOrder extends RequestHandler {
             int startTimeTemp = Integer.parseInt(tempTime) - 2;
             String startTimeFinal = time.toString().substring(0, 3) + startTimeTemp;
             request.setAttribute("startTimeCorrect", startTimeFinal);
+            System.out.println(startTime2);
+            System.out.println(endTime2);
             if (!workOrder.isCorrectDate(startTime2, endTime2, date4)) {
                 throw new DomainException("End time cannot be before start time and work order date/time must be in the past");
             }

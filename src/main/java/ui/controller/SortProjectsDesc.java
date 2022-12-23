@@ -14,14 +14,17 @@ public class SortProjectsDesc extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("projects", service.sortAllProjectsDescending());
         HttpSession session = request.getSession();
-        Role role = (Role) session.getAttribute("userRole");
-        request.setAttribute("roleLoggedIn", role);
-        User user = (User) session.getAttribute("user");
-        request.setAttribute("userLoggedIn", user);
-        int id = (int) session.getAttribute("userId");
-        request.setAttribute("idLoggedIn", id);
-        Team team = (Team) session.getAttribute("userTeam");
-        request.setAttribute("teamLoggedIn", team);
+        if (session.getAttribute("userId") != null) {
+            request.setAttribute("projects", service.sortAllProjectsDescending());
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
+            User user = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user);
+            int id = (int) session.getAttribute("userId");
+            request.setAttribute("idLoggedIn", id);
+            Team team = (Team) session.getAttribute("userTeam");
+            request.setAttribute("teamLoggedIn", team);
+        }
         return "projects.jsp";
     }
 

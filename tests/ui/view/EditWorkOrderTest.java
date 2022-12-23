@@ -39,6 +39,6 @@ public class EditWorkOrderTest {
 
         WorkOrdersPage workOrdersPage = PageFactory.initElements(driver, WorkOrdersPage.class);
         assertEquals("Work Orders",workOrdersPage.getTitle());
-        assertTrue(workOrdersPage.containsWorkOrderWithId("28"));
+        assertTrue(workOrdersPage.containsWorkOrderWithId("2"));
     }
 }

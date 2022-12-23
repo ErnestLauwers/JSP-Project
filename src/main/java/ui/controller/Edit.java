@@ -15,6 +15,9 @@ public class Edit extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<String>();
         String userId = request.getParameter("userId");
+        if (userId == null) {
+            return "edit.jsp";
+        }
         int id = Integer.parseInt(userId);
         request.setAttribute("userToEdit", service.getUser(id));
         User userE = service.getUser(id);

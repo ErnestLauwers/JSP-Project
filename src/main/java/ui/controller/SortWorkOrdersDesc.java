@@ -14,15 +14,16 @@ public class SortWorkOrdersDesc extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("workOrders", service.sortAllWorkOrdersDescending());
         HttpSession session = request.getSession();
-        Role role = (Role) session.getAttribute("userRole");
-        request.setAttribute("roleLoggedIn", role);
-        User user = (User) session.getAttribute("user");
-        request.setAttribute("userLoggedIn", user);
-        int id = (int) session.getAttribute("userId");
-        request.setAttribute("idLoggedIn", id);
-        Team team = (Team) session.getAttribute("userTeam");
-        request.setAttribute("teamLoggedIn", team);
+        if (session.getAttribute("userId") != null) {
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
+            User user = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user);
+            int id = (int) session.getAttribute("userId");
+            request.setAttribute("idLoggedIn", id);
+            Team team = (Team) session.getAttribute("userTeam");
+            request.setAttribute("teamLoggedIn", team);
+        }
         return "workOrders.jsp";
     }
-
 }

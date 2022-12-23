@@ -35,7 +35,7 @@
                     </div>
                 </c:if>
                 <p>
-                    <label for="search">Naar welk project bent u opzoek?</label>
+                    <label for="search">Project Name</label>
                     <input type="text" id="search" name="search" required>
                 </p>
                 <p><input type="submit" id="signUp" value="Search"></p>

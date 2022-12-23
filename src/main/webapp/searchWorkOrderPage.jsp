@@ -30,12 +30,12 @@
                     <c:if test="${errorAanwezig == true}">
                         <div class="alert-danger">
                             <ul>
-                                <li>${error}</li>
+                                <li><c:out value="${error}"/></li>
                             </ul>
                         </div>
                     </c:if>
                     <p>
-                        <label for="search">Naar welke work order bent u opzoek?</label>
+                        <label for="search">Team Name</label>
                         <input type="text" id="search" name="search" required>
                     </p>
                     <p><input type="submit" id="signUp" value="Search"></p>

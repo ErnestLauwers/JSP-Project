@@ -18,8 +18,11 @@ INSERT INTO groep2b5.projects ("name", "team", "startdate", "enddate") values ('
 INSERT INTO groep2b5.projects ("name", "team", "startdate", "enddate") values ('Third', 'Gamma', '17/09/2023', '17/10/2023');
 
 -- grant aan lectoren
+GRANT ALL ON SCHEMA groep2b5 TO local_u0015529;
 GRANT ALL ON SEQUENCE groep2b5.project_id_seq TO local_u0015529;
 GRANT ALL ON TABLE groep2b5.projects TO local_u0015529;
+
+GRANT ALL ON SCHEMA groep2b5 TO local_u0034562;
 GRANT ALL ON SEQUENCE groep2b5.project_id_seq TO local_u0034562;
 GRANT ALL ON TABLE groep2b5.projects TO local_u0034562;
 

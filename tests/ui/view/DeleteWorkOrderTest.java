@@ -40,7 +40,7 @@ public class DeleteWorkOrderTest {
 
         WorkOrdersPage workOrdersPage = PageFactory.initElements(driver, WorkOrdersPage.class);
         assertEquals("Work Orders",deletePage.getTitle());
-        assertTrue(workOrdersPage.containsWorkOrderWithId("27"));
+        assertTrue(workOrdersPage.containsWorkOrderWithId("3"));
     }
 
     @Test
@@ -53,6 +53,6 @@ public class DeleteWorkOrderTest {
 
         WorkOrdersPage workOrdersPage = PageFactory.initElements(driver, WorkOrdersPage.class);
         assertEquals("Work Orders",homePage.getTitle());
-        assertFalse(workOrdersPage.containsWorkOrderWithId("27"));
+        assertFalse(workOrdersPage.containsWorkOrderWithId("3"));
     }
 }

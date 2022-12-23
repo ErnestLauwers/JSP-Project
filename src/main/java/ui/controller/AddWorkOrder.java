@@ -18,6 +18,9 @@ public class AddWorkOrder extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         WorkOrder workOrder = new WorkOrder();
         ArrayList<String> errors = new ArrayList<>();
+        if (request.getParameter("date") == null) {
+            return "addWorkOrder.jsp";
+        }
         try{
             registerDate(request, workOrder, errors);
             registerStartTime(request, workOrder, errors);
@@ -142,18 +145,18 @@ public class AddWorkOrder extends RequestHandler {
         }
     }
 
-
-    /*if (order.getDate() == date4) {
-        if (startTime2.isAfter(order.getStartTime()) && startTime2.isBefore(order.getEndTime()) ||
-                endTime2.isAfter(order.getStartTime()) && endTime2.isBefore(order.getEndTime())) {
-            throw new DomainException("A user cannot perform two jobs at the same time");
-        }
-    }*/
-
     private void registerStartTime(HttpServletRequest request, WorkOrder workOrder, ArrayList<String> errors) {
         String startTime = request.getParameter("startTime");
         String endTime = request.getParameter("endTime");
         String date = request.getParameter("date");
+        String nowStart = LocalTime.now().toString();
+        String nowEnd = LocalTime.now().plusSeconds(1).toString();
+        if (startTime.equals("")) {
+            startTime = nowStart;
+        }
+        if (endTime.equals("")) {
+            endTime = nowEnd;
+        }
         String years = date.substring(0, 4);
         String months = date.substring(5, 7);
         String days = date.substring(date.length() - 2);
@@ -181,6 +184,10 @@ public class AddWorkOrder extends RequestHandler {
 
     private void registerEndTime(HttpServletRequest request, WorkOrder workOrder, ArrayList<String> errors) {
         String endTime = request.getParameter("endTime");
+        String now = LocalTime.now().plusSeconds(1).toString();
+        if (endTime.equals("")) {
+            endTime = now;
+        }
         try{
             DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime endTime2 = LocalTime.parse(endTime, formatter2);

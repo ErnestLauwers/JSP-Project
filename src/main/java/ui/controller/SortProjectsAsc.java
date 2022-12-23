@@ -13,15 +13,17 @@ public class SortProjectsAsc extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        int id = (int) session.getAttribute("userId");
-        request.setAttribute("idLoggedIn", id);
-        Team team = (Team) session.getAttribute("userTeam");
-        request.setAttribute("teamLoggedIn", team);
-        Role role = (Role) session.getAttribute("userRole");
-        request.setAttribute("roleLoggedIn", role);
-        User user = (User) session.getAttribute("user");
-        request.setAttribute("userLoggedIn", user);
-        request.setAttribute("projects", service.sortAllProjectsAscending());
+        if (session.getAttribute("userId") != null) {
+            int id = (int) session.getAttribute("userId");
+            request.setAttribute("idLoggedIn", id);
+            Team team = (Team) session.getAttribute("userTeam");
+            request.setAttribute("teamLoggedIn", team);
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
+            User user = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user);
+            request.setAttribute("projects", service.sortAllProjectsAscending());
+        }
         return "projects.jsp";
     }
 }

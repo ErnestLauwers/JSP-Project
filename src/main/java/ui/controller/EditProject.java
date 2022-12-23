@@ -18,6 +18,9 @@ public class EditProject extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<>();
         String projectid = request.getParameter("projectId");
+        if (projectid == null) {
+            return "editProject.jsp";
+        }
         int id = Integer.parseInt(projectid);
         Project project = service.getProject(id);
         registerStartDate(request, project, errors);

@@ -9,7 +9,7 @@ public class DeleteWorkOrderPage extends Page{
     public DeleteWorkOrderPage(WebDriver driver) {
         super(driver);
         // id veld hangt af van welke work order id's er in de database zijn!
-        this.driver.get(Config.BASE_URL+"Controller?command=DeleteWorkOrderConf&workOrderId=27");
+        this.driver.get(Config.BASE_URL+"Controller?command=DeleteWorkOrderConf&workOrderId=3");
     }
 
     @FindBy(id = "submitYes")

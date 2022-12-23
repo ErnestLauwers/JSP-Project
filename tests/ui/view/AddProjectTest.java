@@ -38,7 +38,7 @@ public class AddProjectTest {
     }
 
     @Test
-    public void test_Add_NameNotFilledIn_ErrorMessageGivenFornName(){
+    public void test_Add_NameNotFilledIn_ErrorMessageGivenForName(){
         AddProjectPage addProjectPage = PageFactory.initElements(driver,AddProjectPage.class);
         addProjectPage.setNameField("");
         addProjectPage.setStartDateField("2023-05-12");

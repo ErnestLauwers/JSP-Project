@@ -11,13 +11,16 @@ public class Delete extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         String userId = request.getParameter("id");
-        int id = Integer.parseInt(userId);
-        service.deleteUser(id);
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        request.setAttribute("userLoggedIn", user);
-        Role role = (Role) session.getAttribute("userRole");
-        request.setAttribute("roleLoggedIn", role);
-        return "index.jsp";
+        if (userId != null) {
+            int id = Integer.parseInt(userId);
+            service.deleteUser(id);
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user);
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
+            return "index.jsp";
+        }
+        return "delete.jsp";
     }
 }

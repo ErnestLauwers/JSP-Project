@@ -28,6 +28,7 @@
             <c:choose>
                 <c:when test="${found == true}">
                     <p>We found the following work orders</p>
+                    <c:forEach var="workOrder" items="${requestScope.workOrders}">
                     <br>
                     <br>
                     <table>
@@ -40,14 +41,15 @@
                             <th>End Time</th>
                         </tr>
                         <tr>
-                            <td>${foundResult.workOrderId}</td>
-                            <td>${foundResult.name}</td>
-                            <td>${foundResult.team}</td>
-                            <td>${foundResult.date}</td>
-                            <td>${foundResult.startTime}</td>
-                            <td>${foundResult.endTime}</td>
+                            <td>${workOrder.workOrderId}</td>
+                            <td>${workOrder.name}</td>
+                            <td>${workOrder.team}</td>
+                            <td>${workOrder.date}</td>
+                            <td>${workOrder.startTime}</td>
+                            <td>${workOrder.endTime}</td>
                         </tr>
                     </table>
+                </c:forEach>
                 </c:when>
                 <c:otherwise>
                     <p>We hebben geen work order gevonden met het opgegeven team</p>

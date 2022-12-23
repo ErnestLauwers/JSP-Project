@@ -28,22 +28,22 @@ public class RegisterUserTest {
     public void test_Register_AllFieldsFilledInCorrectly_UserIsRegistered_and_RoleIsEmployee()
     {
         RegisterPage registerPage = PageFactory.initElements(driver,RegisterPage.class);
-        registerPage.setLastNameField("Smith");
-        registerPage.setFirstNameField("Bart");
-        registerPage.setEmailField("bart.smith@gmail.com");
-        registerPage.setPasswordField("123piano");
+        registerPage.setLastNameField("Lauwers");
+        registerPage.setFirstNameField("Ernest");
+        registerPage.setEmailField("ernest.lauwers@gmail.com");
+        registerPage.setPasswordField("t");
         registerPage.register();
         OverviewPage overviewPage = PageFactory.initElements(driver, OverviewPage.class);
-        assertEquals("Overview",overviewPage.getTitle());
-        assertTrue(overviewPage.containsUserWithEmail("bart.smith@gmail.com"));
+        assertEquals("Users",overviewPage.getTitle());
+        assertTrue(overviewPage.containsUserWithEmail("ernest.lauwers@gmail.com"));
     }
 
     @Test
     public void test_Register_EmailNotFilledIn_ErrorMessageGivenForEmailAndOtherFieldsValueKept(){
         RegisterPage registerPage = PageFactory.initElements(driver,RegisterPage.class);
-        registerPage.setLastNameField("Smith");
-        registerPage.setFirstNameField("Bart");
-        registerPage.setPasswordField("123piano");
+        registerPage.setLastNameField("Lauwers");
+        registerPage.setFirstNameField("Ernest");
+        registerPage.setPasswordField("t");
         registerPage.register();
 
         assertEquals("Register",registerPage.getTitle());
@@ -54,9 +54,9 @@ public class RegisterUserTest {
     @Test
     public void test_Register_PasswordNotFilledIn_ErrorMessageGivenForEmailAndOtherFieldsValueKept(){
         RegisterPage registerPage = PageFactory.initElements(driver,RegisterPage.class);
-        registerPage.setLastNameField("Smith");
-        registerPage.setFirstNameField("Bart");
-        registerPage.setEmailField("bart.smith@gmail.com");
+        registerPage.setLastNameField("Lauwers");
+        registerPage.setFirstNameField("Ernest");
+        registerPage.setEmailField("ernest.lauwers@gmail.com");
         registerPage.register();
 
         assertEquals("Register",registerPage.getTitle());
@@ -68,9 +68,9 @@ public class RegisterUserTest {
     public void test_Register_FirstNameNotFilledIn_ErrorMessageGivenForFirstNameAndOtherFieldsValueKept()
     {
         RegisterPage registerPage = PageFactory.initElements(driver,RegisterPage.class);
-        registerPage.setLastNameField("Smith");
-        registerPage.setEmailField("bart.smith@gmail.com");
-        registerPage.setPasswordField("123piano");
+        registerPage.setLastNameField("Lauwers");
+        registerPage.setEmailField("ernest.lauwers@gmail.com");
+        registerPage.setPasswordField("t");
         registerPage.register();
 
         assertEquals("Register",registerPage.getTitle());
@@ -81,9 +81,9 @@ public class RegisterUserTest {
     @Test
     public void test_Register_LastNameNotFilledIn_ErrorMessageGivenForLastNameAndOtherFieldsValueKept(){
         RegisterPage registerPage = PageFactory.initElements(driver,RegisterPage.class);
-        registerPage.setFirstNameField("Bart");
-        registerPage.setEmailField("bart.smith@gmail.com");
-        registerPage.setPasswordField("123piano");
+        registerPage.setFirstNameField("Ernest");
+        registerPage.setEmailField("ernest.lauwers@gmail.com");
+        registerPage.setPasswordField("t");
         registerPage.register();
 
         assertEquals("Register",registerPage.getTitle());
@@ -94,12 +94,12 @@ public class RegisterUserTest {
     @Test
     public void test_Register_User_Already_Exists_ErrorMessageGiven(){
         RegisterPage registerPage = PageFactory.initElements(driver,RegisterPage.class);
-        registerPage.setLastNameField("Smith");
-        registerPage.setFirstNameField("Bart");
-        registerPage.setEmailField("bart.smith@gmail.com");
-        registerPage.setPasswordField("123piano");
+        registerPage.setLastNameField("Lauwers");
+        registerPage.setFirstNameField("Ernest");
+        registerPage.setEmailField("director@ucll.be");
+        registerPage.setPasswordField("t");
         registerPage.register();
         assertEquals("Register", registerPage.getTitle());
-        assertTrue(registerPage.hasErrorMessage("Email already in use"));
+        assertTrue(registerPage.hasErrorMessage("This email is already in use"));
     }
 }

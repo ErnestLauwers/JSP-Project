@@ -19,6 +19,9 @@ public class AddProject extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         Project project = new Project();
         ArrayList<String> errors = new ArrayList<>();
+        if (request.getParameter("startDate") == null) {
+            return "addProject.jsp";
+        }
         try {
             registerName(request, project, errors);
             registerTeam(request, project, errors);

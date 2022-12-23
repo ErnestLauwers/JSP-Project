@@ -12,13 +12,15 @@ public class DeleteProjectConfirmation extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         String projectId = request.getParameter("projectId");
-        int id = Integer.parseInt(projectId);
-        request.setAttribute("projectToDelete", service.getProject(id));
-        HttpSession session = request.getSession();
-        Role role = (Role) session.getAttribute("userRole");
-        request.setAttribute("roleLoggedIn", role);
-        User user = (User) session.getAttribute("user");
-        request.setAttribute("userLoggedIn", user);
+        if (projectId != null) {
+            int id = Integer.parseInt(projectId);
+            request.setAttribute("projectToDelete", service.getProject(id));
+            HttpSession session = request.getSession();
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
+            User user = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user);
+        }
         return "deleteProject.jsp";
     }
 

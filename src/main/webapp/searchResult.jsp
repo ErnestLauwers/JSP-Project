@@ -27,7 +27,7 @@
     <main>
         <c:choose>
             <c:when test="${found == true}">
-                <p>We found the following projects</p>
+                <p>We found the following project</p>
                 <br>
                 <br>
                 <table>
@@ -39,11 +39,11 @@
                         <th>End</th>
                     </tr>
                     <tr>
-                        <td>${foundResult.projectId}</td>
-                        <td>${foundResult.name}</td>
-                        <td>${foundResult.team}</td>
-                        <td>${foundResult.startDate}</td>
-                        <td>${foundResult.endDate}</td>
+                        <td><c:out value="${foundResult.projectId}"/></td>
+                        <td><c:out value="${foundResult.name}"/></td>
+                        <td><c:out value="${foundResult.team}"/></td>
+                        <td><c:out value="${foundResult.startDate}"/></td>
+                        <td><c:out value="${foundResult.endDate}"/></td>
                     </tr>
                 </table>
             </c:when>

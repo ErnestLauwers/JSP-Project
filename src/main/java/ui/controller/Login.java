@@ -12,6 +12,9 @@ public class Login extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+        if (request.getParameter("email") == null) {
+            return "index.jsp";
+        }
         String email = request.getParameter("email").toLowerCase(Locale.ROOT);
         String password = request.getParameter("password");
 

@@ -11,13 +11,15 @@ public class DeleteWorkOrderConf extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         String workOrderId = request.getParameter("workOrderId");
-        int id = Integer.parseInt(workOrderId);
-        request.setAttribute("workOrderToDelete", service.getWorkOrder(id));
-        HttpSession session = request.getSession();
-        Role role = (Role) session.getAttribute("userRole");
-        request.setAttribute("roleLoggedIn", role);
-        User user = (User) session.getAttribute("user");
-        request.setAttribute("userLoggedIn", user);
+        if (workOrderId != null) {
+            int id = Integer.parseInt(workOrderId);
+            request.setAttribute("workOrderToDelete", service.getWorkOrder(id));
+            HttpSession session = request.getSession();
+            Role role = (Role) session.getAttribute("userRole");
+            request.setAttribute("roleLoggedIn", role);
+            User user = (User) session.getAttribute("user");
+            request.setAttribute("userLoggedIn", user);
+        }
         return "deleteWorkOrder.jsp";
     }
 }

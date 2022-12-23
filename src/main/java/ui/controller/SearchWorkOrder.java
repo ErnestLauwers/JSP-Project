@@ -7,12 +7,14 @@ import domain.model.WorkOrder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class SearchWorkOrder extends RequestHandler {
 
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         String workOrderTeam = request.getParameter("search");
+        ArrayList<WorkOrder> workOrders = new ArrayList<>();
         if (workOrderTeam == null || workOrderTeam.isEmpty()) {
             request.setAttribute("errorAanwezig", true);
             HttpSession session = request.getSession();
@@ -26,16 +28,18 @@ public class SearchWorkOrder extends RequestHandler {
         for (WorkOrder workOrder : service.getAllWorkOrders()) {
             if (workOrder.getTeam().getStringValue().toLowerCase(Locale.ROOT).equals(workOrderTeam.toLowerCase(Locale.ROOT))) {
                 request.setAttribute("found", true);
-                request.setAttribute("foundResult", workOrder);
+                workOrders.add(workOrder);
                 HttpSession session = request.getSession();
                 Role role = (Role) session.getAttribute("userRole");
                 request.setAttribute("roleLoggedIn", role);
                 User user = (User) session.getAttribute("user");
                 request.setAttribute("userLoggedIn", user);
-                return "searchWorkOrderResult.jsp";
+                request.setAttribute("workOrders", workOrders);
             }
         }
-        request.setAttribute("found", false);
+        if (workOrders.size() == 0) {
+            request.setAttribute("found", false);
+        }
         HttpSession session = request.getSession();
         Role role = (Role) session.getAttribute("userRole");
         request.setAttribute("roleLoggedIn", role);
