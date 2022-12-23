@@ -21,11 +21,9 @@ INSERT INTO groep2b5.workorders ("name","team","date","starttime","endtime","des
 INSERT INTO groep2b5.workorders ("name","team","date","starttime","endtime","description", "userid") values ('Chris Johnson', 'Gamma', '12/10/2022', '09:00:00', '10:30:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 5);
 
 -- grant aan lectoren
-GRANT ALL ON SCHEMA groep2b5 TO local_u0034562;
 GRANT ALL ON SEQUENCE groep2b5.workorder_id_seq TO local_u0015529;
 GRANT ALL ON TABLE groep2b5.workorders TO local_u0015529;
 
-GRANT ALL ON SCHEMA groep2b5 TO local_u0034562;
 GRANT ALL ON SEQUENCE groep2b5.workorder_id_seq TO local_u0034562;
 GRANT ALL ON TABLE groep2b5.workorders TO local_u0034562;
 

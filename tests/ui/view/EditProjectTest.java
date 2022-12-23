@@ -28,7 +28,7 @@ public class EditProjectTest {
         EditProjectPage editProjectPage = PageFactory.initElements(driver, EditProjectPage.class);
         editProjectPage.setStartDateField("");
         editProjectPage.edit();
-        assertFalse(editProjectPage.hasErrorMessage("Start Date is obligated!"));
+        assertNotEquals("Edit Project", editProjectPage.getTitle());
     }
 
     @Test
@@ -38,7 +38,7 @@ public class EditProjectTest {
         editProjectPage.edit();
 
         ProjectsPage projectsPage = PageFactory.initElements(driver, ProjectsPage.class);
-        assertEquals("Work Orders", projectsPage.getTitle());
+        assertEquals("Projects", projectsPage.getTitle());
         assertTrue(projectsPage.containsProjectWithName("First"));
     }
 }

@@ -8,7 +8,7 @@ public class EditPage extends RegisterPage{
 
     public EditPage(WebDriver driver) {
         super(driver);
-        this.driver.get(Config.BASE_URL+"Controller?command=StartEdit&id=7");
+        this.driver.get(Config.BASE_URL+"Controller?command=StartEdit&id=3");
     }
 
     @FindBy(id = "edit")

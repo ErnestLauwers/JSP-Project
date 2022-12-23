@@ -41,6 +41,7 @@
                 </div>
             </form>
         </div>
+        <p>Beste Lectoren, hierbij een waarschuwing dat sommige tests de testgebruikers verwijderen of aanpassen</p>
     </main>
     <footer>
         <p>&copy; Webontwikkeling 3, UC Leuven-Limburg</p>

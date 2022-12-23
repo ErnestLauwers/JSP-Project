@@ -8,7 +8,7 @@ public class EditWorkOrderPage extends AddWorkOrderPage{
 
     public EditWorkOrderPage(WebDriver driver) {
         super(driver);
-        this.driver.get(Config.BASE_URL+"Controller?command=EditWorkOrderPage&workOrderId=28");
+        this.driver.get(Config.BASE_URL+"Controller?command=EditWorkOrderPage&workOrderId=2");
     }
 
     @FindBy(id = "signUp")

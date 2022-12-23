@@ -8,7 +8,7 @@ public class EditProjectPage extends AddProjectPage{
 
     public EditProjectPage(WebDriver driver) {
         super(driver);
-        this.driver.get(Config.BASE_URL+"Controller?command=EditProjectPage&projectId=1");
+        this.driver.get(Config.BASE_URL+"Controller?command=EditProjectPage&projectid=1");
     }
 
     @FindBy(id = "signUp")
